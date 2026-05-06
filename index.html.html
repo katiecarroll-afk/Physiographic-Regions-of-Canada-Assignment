@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<!-- saved from url=(0066)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physiographic Regions of Canada — Digital Fact File</title>
+<link href="./Physiographic Regions of Canada — Digital Fact File_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --green: #2d8a5e;
+    --green-light: #e8f5ee;
+    --green-mid: #4caf80;
+    --blue: #2563a8;
+    --blue-light: #e8f0fb;
+    --amber: #d97706;
+    --amber-light: #fef3e2;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --purple: #6d28d9;
+    --purple-light: #ede9fe;
+    --teal: #0891b2;
+    --teal-light: #e0f7fa;
+    --slate: #475569;
+    --bg: #f8f9fb;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+  h1,h2,h3,h4 { font-family: 'Nunito', sans-serif; font-weight: 800; line-height: 1.2; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.1rem; font-weight: 700; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #1a4731 0%, #2d8a5e 50%, #1a6b4a 100%);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .site-header .maple { font-size: 2.5rem; margin-bottom: 0.5rem; display: block; }
+  .site-header h1 { color: #fff; font-size: 1.8rem; margin-bottom: 0.4rem; }
+  .site-header p { color: rgba(255,255,255,0.85); font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+
+  /* ── PROGRESS ── */
+  #progress-section {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .progress-inner { max-width: 700px; margin: 0 auto; }
+  .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .progress-label { font-size: 0.82rem; font-weight: 700; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .progress-count { font-size: 0.82rem; font-weight: 700; color: var(--green); }
+  .progress-track { height: 9px; background: #e8f5ee; border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #2d8a5e, #4caf80); border-radius: 99px; transition: width 0.5s ease; width: 0%; }
+
+  /* ── LAYOUT ── */
+  .main { max-width: 700px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+  /* ── SCREEN SYSTEM ── */
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── HOME GRID ── */
+  .home-intro { margin-bottom: 1.5rem; }
+  .home-intro h2 { margin-bottom: 0.4rem; color: var(--text); }
+  .home-intro p { color: var(--muted); font-size: 0.95rem; }
+  .region-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .region-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    overflow: hidden;
+    text-align: left;
+  }
+  .region-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--green); }
+  .region-card.done { border-color: var(--green); border-width: 2px; }
+  .region-card .card-img { width: 100%; height: 90px; overflow: hidden; }
+  .region-card .card-img svg { width: 100%; height: 100%; display: block; }
+  .region-card .card-body { padding: 10px 12px 12px; }
+  .region-card .card-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.88rem; color: var(--text); line-height: 1.3; }
+  .region-card .card-status { font-size: 0.75rem; margin-top: 4px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .region-card.done .card-status { color: var(--green); }
+  .check-circle { width: 14px; height: 14px; border-radius: 50%; background: var(--green); display: inline-flex; align-items: center; justify-content: center; }
+  .check-circle svg { width: 8px; height: 8px; }
+
+  /* ── HOW-TO CARD ── */
+  .how-card { background: var(--blue-light); border: 1px solid #bfdbfe; border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+  .how-card h3 { color: var(--blue); margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .how-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .how-step { background: #fff; border-radius: var(--radius-sm); padding: 10px; }
+  .how-step .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; }
+  .how-step p { font-size: 0.8rem; color: var(--slate); line-height: 1.4; }
+
+  /* ── REGION DETAIL ── */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.85rem;
+    color: var(--muted); background: none; border: 1px solid var(--border);
+    border-radius: 99px; padding: 6px 14px; cursor: pointer; margin-bottom: 1rem;
+    transition: all 0.15s;
+  }
+  .back-btn:hover { background: var(--card); color: var(--text); }
+  .region-hero {
+    width: 100%; height: 180px; border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden; position: relative;
+  }
+  .region-hero svg { width: 100%; height: 100%; display: block; }
+  .region-hero-label {
+    position: absolute; bottom: 12px; left: 14px;
+    background: rgba(0,0,0,0.55); color: #fff;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 1.4rem; padding: 4px 12px; border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+  .detail-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0 0 var(--radius) var(--radius);
+    margin-bottom: 1rem;
+  }
+
+  /* ── STEPPER ── */
+  .stepper { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); overflow-x: auto; gap: 0; }
+  .step-dot {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    border: 2px solid var(--border); background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.75rem;
+    color: var(--muted); cursor: pointer; transition: all 0.2s;
+  }
+  .step-dot.active { background: var(--green); border-color: var(--green); color: #fff; }
+  .step-dot.done-step { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .step-line { flex: 1; height: 2px; background: var(--border); min-width: 8px; }
+  .step-line.done-line { background: var(--green); }
+
+  .step-body { padding: 1.25rem 1.25rem 0.5rem; }
+
+  /* ── FACT TABLE ── */
+  .fact-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .fact-table tr { border-bottom: 1px solid var(--border); }
+  .fact-table tr:last-child { border-bottom: none; }
+  .fact-table td { padding: 8px 6px; vertical-align: top; }
+  .fact-table td:first-child { font-weight: 700; color: var(--muted); width: 38%; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.03em; padding-right: 12px; }
+  .fact-table td:last-child { color: var(--text); }
+
+  /* ── READING SECTIONS ── */
+  .reading-block { margin-bottom: 1rem; }
+  .section-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 99px; margin-bottom: 8px;
+  }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .reading-block p { font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+
+  /* ── QUESTIONS ── */
+  .q-label { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); margin-bottom: 0.6rem; line-height: 1.5; }
+  .q-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: var(--green); color: #fff; border-radius: 50%; font-size: 0.78rem; font-weight: 800; margin-right: 6px; flex-shrink: 0; vertical-align: middle; }
+  .hint-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.83rem; color: #92400e; margin-bottom: 0.75rem; display: flex; gap: 6px; align-items: flex-start; }
+  .hint-box .hint-icon { flex-shrink: 0; font-size: 0.9rem; }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0.5rem; }
+  .chip {
+    background: var(--bg); border: 1.5px solid var(--border);
+    border-radius: 99px; padding: 8px 18px; font-size: 0.9rem;
+    font-family: 'Nunito Sans', sans-serif; font-weight: 600;
+    cursor: pointer; color: var(--text); transition: all 0.15s;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--green); background: var(--green-light); }
+  .chip.selected { background: var(--green-light); border-color: var(--green); color: #1a4731; }
+  .chip.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .chip.locked { pointer-events: none; }
+  .feedback {
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    font-size: 0.88rem; line-height: 1.5; margin-top: 8px;
+    display: none; align-items: flex-start; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.good { background: var(--green-light); border: 1px solid #86efac; color: #14532d; }
+  .feedback.bad { background: var(--red-light); border: 1px solid #fca5a5; color: var(--red); }
+  .feedback-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  textarea.text-answer {
+    width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+    padding: 10px 12px; font-size: 0.93rem; font-family: 'Nunito Sans', sans-serif;
+    color: var(--text); background: var(--card); resize: vertical; min-height: 90px;
+    line-height: 1.65; transition: border-color 0.15s;
+  }
+  textarea.text-answer:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,138,94,0.12); }
+
+  /* ── DIVIDER ── */
+  .q-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+  /* ── NAV BUTTONS ── */
+  .nav-row { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-top: 1px solid var(--border); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.9rem;
+    padding: 9px 20px; border-radius: 99px; cursor: pointer; border: 1.5px solid;
+    transition: all 0.15s;
+  }
+  .btn-outline { background: var(--card); border-color: var(--border); color: var(--text); }
+  .btn-outline:hover { background: var(--bg); border-color: var(--slate); }
+  .btn-primary { background: var(--green); border-color: var(--green); color: #fff; }
+  .btn-primary:hover { background: #1a6b4a; border-color: #1a6b4a; }
+  .btn-success { background: #16a34a; border-color: #16a34a; color: #fff; }
+  .btn-success:hover { background: #15803d; }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ── COMPLETION ── */
+  .done-banner { background: linear-gradient(135deg, #1a4731, #2d8a5e); border-radius: var(--radius); padding: 2rem; text-align: center; color: #fff; margin-bottom: 1.5rem; }
+  .done-banner .trophy { font-size: 3rem; display: block; margin-bottom: 0.5rem; }
+  .done-banner h2 { color: #fff; font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .done-banner p { color: rgba(255,255,255,0.85); font-size: 0.95rem; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; text-align: center; }
+  .stat-card .num { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--green); }
+  .stat-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+
+  /* ── SUBMIT CARD ── */
+  .submit-card {
+    background: var(--card);
+    border: 2px solid var(--green);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.25rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .name-input {
+    width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+    padding: 10px 12px; font-size: 1rem; font-family: 'Nunito Sans', sans-serif;
+    color: var(--text); background: var(--card); transition: border-color 0.15s;
+  }
+  .name-input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(45,138,94,0.12); }
+
+  /* ── PRINT SUMMARY ── */
+  @media print {
+    body { background: #fff !important; }
+    .site-header, #progress-section, .main { display: none !important; }
+    #print-summary { display: block !important; }
+  }
+  #print-summary {
+    display: none;
+    font-family: 'Nunito Sans', Georgia, serif;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 2rem 2.5rem;
+    color: #1e293b;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .ps-header {
+    border-bottom: 3px solid #2d8a5e;
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .ps-header h1 { font-family: 'Nunito', sans-serif; font-size: 1.3rem; color: #1a4731; margin-bottom: 0.2rem; }
+  .ps-header p { font-size: 0.8rem; color: #64748b; }
+  .ps-meta { text-align: right; font-size: 0.82rem; color: #475569; }
+  .ps-meta strong { display: block; font-size: 1rem; color: #1e293b; }
+  .ps-region { page-break-inside: avoid; margin-bottom: 1.4rem; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+  .ps-region-header { background: #1a4731; color: #fff; padding: 7px 12px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; }
+  .ps-region-body { padding: 10px 12px; }
+  .ps-q { margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
+  .ps-q:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .ps-q-label { font-weight: 700; font-size: 0.8rem; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+  .ps-q-text { font-size: 0.85rem; color: #374151; margin-bottom: 4px; }
+  .ps-answer { font-size: 0.88rem; padding: 5px 10px; border-radius: 5px; }
+  .ps-answer.correct { background: #e8f5ee; color: #14532d; border-left: 3px solid #2d8a5e; }
+  .ps-answer.written { background: #f8fafc; color: #1e293b; border-left: 3px solid #94a3b8; white-space: pre-wrap; }
+  .ps-footer { margin-top: 1.5rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; font-size: 0.75rem; color: #94a3b8; text-align: center; }
+
+  /* ── PRINT ── */
+  @media print {
+    .site-header, #progress-section, .back-btn, .nav-row, .btn { display: none !important; }
+    .screen { display: block !important; }
+    .region-hero { height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <span class="maple">🍁</span>
+  <h1>Physiographic Regions of Canada</h1>
+  <p>Digital Fact File &nbsp;·&nbsp; Complete one region at a time &nbsp;·&nbsp; Click to answer</p>
+</header>
+
+<div id="progress-section">
+  <div class="progress-inner">
+    <div class="progress-top">
+      <span class="progress-label">Your progress</span>
+      <span class="progress-count" id="prog-count">0 of 7 regions complete</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width: 0%;"></div></div>
+  </div>
+</div>
+
+<main class="main">
+
+<!-- HOME -->
+<div class="screen active" id="home-screen">
+  <div class="how-card">
+    <h3>📋 How this works</h3>
+    <div class="how-steps">
+      <div class="how-step"><div class="step-num">1</div><p>Pick any region from the cards below</p></div>
+      <div class="how-step"><div class="step-num">2</div><p>Read the facts, formation, and Indigenous peoples sections</p></div>
+      <div class="how-step"><div class="step-num">3</div><p>Answer by clicking — most questions just need a tap!</p></div>
+      <div class="how-step"><div class="step-num">4</div><p>Write one short reflection per region (1–2 sentences)</p></div>
+    </div>
+  </div>
+  <div class="home-intro">
+    <h2>Choose a region to start</h2>
+    <p>You can do them in any order. Each completed region turns green. ✓</p>
+  </div>
+  <div class="region-grid" id="region-grid"><button class="region-card " onclick="openRegion(&#39;canadian-shield&#39;)" aria-label="Open Canadian Shield">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="180" fill="#c8e6d4"></rect>
+    <ellipse cx="350" cy="250" rx="400" ry="160" fill="#7db87d" opacity="0.4"></ellipse>
+    <rect x="0" y="110" width="700" height="70" fill="#5a8a5a"></rect>
+    <rect x="0" y="130" width="700" height="50" fill="#4a7a4a"></rect>
+    <!-- water reflections -->
+    <ellipse cx="120" cy="118" rx="55" ry="12" fill="#7ecbdc" opacity="0.85"></ellipse>
+    <ellipse cx="380" cy="122" rx="70" ry="14" fill="#7ecbdc" opacity="0.8"></ellipse>
+    <ellipse cx="580" cy="115" rx="45" ry="10" fill="#7ecbdc" opacity="0.8"></ellipse>
+    <!-- bedrock slabs -->
+    <path d="M0 108 Q60 96 130 102 Q200 108 270 98 Q340 88 420 100 Q500 112 570 104 Q640 96 700 108 L700 130 L0 130Z" fill="#8b7355"></path>
+    <path d="M0 118 Q80 108 160 114 Q240 120 310 110 Q380 100 450 110 Q520 120 600 112 Q660 104 700 118 L700 135 L0 135Z" fill="#9e8b6e" opacity="0.6"></path>
+    <!-- trees -->
+    <g fill="#2d5a2d">
+      <polygon points="50,100 65,70 80,100"></polygon><rect x="62" y="99" width="6" height="12" fill="#5c3d2e"></rect>
+      <polygon points="100,98 118,62 136,98"></polygon><rect x="114" y="97" width="8" height="13" fill="#5c3d2e"></rect>
+      <polygon points="160,104 175,75 190,104"></polygon><rect x="171" y="103" width="6" height="11" fill="#5c3d2e"></rect>
+      <polygon points="490,100 507,68 524,100"></polygon><rect x="503" y="99" width="8" height="12" fill="#5c3d2e"></rect>
+      <polygon points="550,96 565,68 580,96"></polygon><rect x="561" y="95" width="6" height="11" fill="#5c3d2e"></rect>
+      <polygon points="620,102 635,72 650,102"></polygon><rect x="631" y="101" width="6" height="12" fill="#5c3d2e"></rect>
+    </g>
+    <!-- rolling hills silhouette -->
+    <path d="M0 130 Q50 100 120 110 Q180 118 250 105 Q320 92 390 108 Q460 122 540 108 Q610 94 700 115 L700 180 L0 180Z" fill="#3d6b3d"></path>
+    <!-- sky gradient elements -->
+    <circle cx="600" cy="30" r="28" fill="#ffe082" opacity="0.7"></circle>
+    <ellipse cx="200" cy="25" rx="70" ry="20" fill="#fff" opacity="0.5"></ellipse>
+    <ellipse cx="420" cy="18" rx="55" ry="16" fill="#fff" opacity="0.4"></ellipse>
+    <ellipse cx="100" cy="35" rx="45" ry="14" fill="#fff" opacity="0.35"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🪨 Canadian Shield</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;western-cordillera&#39;)" aria-label="Open Western Cordillera">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87ceeb"></stop><stop offset="100%" stop-color="#c8e6f5"></stop></lineargradient>
+    <lineargradient id="snow1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"></stop><stop offset="100%" stop-color="#ddeeff"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky1)"></rect>
+    <!-- far mountains -->
+    <path d="M0 130 L60 60 L120 100 L180 40 L240 90 L300 30 L360 80 L420 20 L480 70 L540 35 L600 75 L660 45 L700 80 L700 180 L0 180Z" fill="#9db8c8" opacity="0.5"></path>
+    <!-- mid mountains -->
+    <path d="M0 150 L80 80 L150 120 L220 55 L300 100 L380 45 L460 95 L520 50 L580 90 L640 60 L700 100 L700 180 L0 180Z" fill="#6b8fa8"></path>
+    <!-- snow caps -->
+    <path d="M220 55 L237 75 L244 70 L252 78 L260 65 L270 75 L280 60 L295 82 L300 100 L220 55Z" fill="url(#snow1)" opacity="0.9"></path>
+    <path d="M380 45 L395 68 L402 62 L410 72 L420 56 L430 70 L440 58 L452 78 L460 95 L380 45Z" fill="url(#snow1)" opacity="0.9"></path>
+    <path d="M520 50 L535 72 L542 65 L550 76 L558 60 L568 74 L580 90 L520 50Z" fill="url(#snow1)" opacity="0.85"></path>
+    <!-- foreground mountains -->
+    <path d="M0 180 L100 110 L180 150 L260 90 L340 135 L420 80 L500 125 L580 95 L660 130 L700 110 L700 180Z" fill="#3d5c6b"></path>
+    <!-- glacier -->
+    <path d="M260 90 L275 105 L272 118 L268 115 L265 122 L260 118 L255 125 L252 120 L248 126 L244 118 L240 122 L236 112 L240 100 L250 94Z" fill="#c8e8f8" opacity="0.85"></path>
+    <!-- forest at base -->
+    <path d="M0 180 L0 155 Q50 140 100 148 Q180 158 260 145 Q340 132 420 148 Q500 162 580 150 Q640 142 700 152 L700 180Z" fill="#2d4a2d"></path>
+    <!-- lake reflection -->
+    <ellipse cx="170" cy="165" rx="60" ry="12" fill="#7ecbdc" opacity="0.7"></ellipse>
+    <!-- sun -->
+    <circle cx="640" cy="28" r="22" fill="#ffe082" opacity="0.9"></circle>
+    <!-- clouds -->
+    <ellipse cx="100" cy="22" rx="65" ry="18" fill="#fff" opacity="0.7"></ellipse>
+    <ellipse cx="380" cy="15" rx="50" ry="14" fill="#fff" opacity="0.6"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🏔️ Western Cordillera</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;interior-plains&#39;)" aria-label="Open Interior Plains">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87ceeb"></stop><stop offset="100%" stop-color="#d4edf7"></stop></lineargradient>
+    <lineargradient id="wheat" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842"></stop><stop offset="100%" stop-color="#d4952a"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky2)"></rect>
+    <!-- horizon line hills -->
+    <path d="M0 100 Q100 92 200 98 Q300 104 400 96 Q500 88 600 94 Q660 98 700 96 L700 180 L0 180Z" fill="#7ab648" opacity="0.4"></path>
+    <!-- wheat fields in strips -->
+    <rect x="0" y="108" width="700" height="72" fill="#c8960a" opacity="0.25"></rect>
+    <path d="M0 115 Q175 108 350 115 Q525 122 700 115 L700 145 L0 145Z" fill="url(#wheat)" opacity="0.55"></path>
+    <path d="M0 140 Q175 133 350 140 Q525 147 700 140 L700 180 L0 180Z" fill="#8a6520" opacity="0.5"></path>
+    <!-- wheat stalks -->
+    <g stroke="#d4952a" stroke-width="1.2" opacity="0.8">
+      <line x1="20" y1="135" x2="20" y2="115"></line><ellipse cx="20" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="45" y1="133" x2="45" y2="113"></line><ellipse cx="45" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="70" y1="135" x2="70" y2="115"></line><ellipse cx="70" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="95" y1="132" x2="95" y2="112"></line><ellipse cx="95" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="120" y1="134" x2="120" y2="114"></line><ellipse cx="120" cy="112" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="145" y1="133" x2="145" y2="113"></line><ellipse cx="145" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="170" y1="136" x2="170" y2="116"></line><ellipse cx="170" cy="114" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="195" y1="132" x2="195" y2="112"></line><ellipse cx="195" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="220" y1="135" x2="220" y2="115"></line><ellipse cx="220" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="245" y1="133" x2="245" y2="113"></line><ellipse cx="245" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="270" y1="134" x2="270" y2="114"></line><ellipse cx="270" cy="112" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="295" y1="132" x2="295" y2="112"></line><ellipse cx="295" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="320" y1="135" x2="320" y2="115"></line><ellipse cx="320" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="345" y1="133" x2="345" y2="113"></line><ellipse cx="345" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="370" y1="136" x2="370" y2="116"></line><ellipse cx="370" cy="114" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="395" y1="132" x2="395" y2="112"></line><ellipse cx="395" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="420" y1="135" x2="420" y2="115"></line><ellipse cx="420" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="445" y1="133" x2="445" y2="113"></line><ellipse cx="445" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="470" y1="134" x2="470" y2="114"></line><ellipse cx="470" cy="112" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="495" y1="132" x2="495" y2="112"></line><ellipse cx="495" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="520" y1="135" x2="520" y2="115"></line><ellipse cx="520" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="545" y1="133" x2="545" y2="113"></line><ellipse cx="545" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="570" y1="136" x2="570" y2="116"></line><ellipse cx="570" cy="114" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="595" y1="132" x2="595" y2="112"></line><ellipse cx="595" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="620" y1="135" x2="620" y2="115"></line><ellipse cx="620" cy="113" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="645" y1="133" x2="645" y2="113"></line><ellipse cx="645" cy="111" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="670" y1="134" x2="670" y2="114"></line><ellipse cx="670" cy="112" rx="3" ry="5" fill="#f5c842"></ellipse>
+      <line x1="695" y1="132" x2="695" y2="112"></line><ellipse cx="695" cy="110" rx="3" ry="5" fill="#f5c842"></ellipse>
+    </g>
+    <!-- farm road -->
+    <path d="M340 180 L350 108 L360 108 L370 180Z" fill="#c8a060" opacity="0.5"></path>
+    <!-- grain elevator -->
+    <rect x="500" y="60" width="30" height="55" fill="#c8a060"></rect>
+    <rect x="495" y="55" width="40" height="10" fill="#b08040"></rect>
+    <polygon points="495,55 515,40 535,55" fill="#8a6020"></polygon>
+    <rect x="508" y="85" width="10" height="30" fill="#7a5010"></rect>
+    <!-- sun -->
+    <circle cx="80" cy="25" r="22" fill="#ffe082" opacity="0.9"></circle>
+    <!-- clouds -->
+    <ellipse cx="280" cy="20" rx="75" ry="18" fill="#fff" opacity="0.75"></ellipse>
+    <ellipse cx="560" cy="30" rx="55" ry="15" fill="#fff" opacity="0.6"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🌾 Interior Plains</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;appalachian&#39;)" aria-label="Open Appalachian Region">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a6b8a"></stop><stop offset="100%" stop-color="#0d4a68"></stop></lineargradient>
+    <lineargradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6eb5d4"></stop><stop offset="100%" stop-color="#a8d8ea"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky3)"></rect>
+    <!-- ocean -->
+    <rect x="0" y="110" width="700" height="70" fill="url(#ocean)"></rect>
+    <!-- ocean waves -->
+    <path d="M0 115 Q35 108 70 115 Q105 122 140 115 Q175 108 210 115 Q245 122 280 115 Q315 108 350 115 Q385 122 420 115 Q455 108 490 115 Q525 122 560 115 Q595 108 630 115 Q665 122 700 115" stroke="#5bb8d4" stroke-width="2" fill="none" opacity="0.5"></path>
+    <path d="M0 125 Q35 118 70 125 Q105 132 140 125 Q175 118 210 125 Q245 132 280 125 Q315 118 350 125 Q385 132 420 125 Q455 118 490 125 Q525 132 560 125 Q595 118 630 125 Q665 132 700 125" stroke="#5bb8d4" stroke-width="1.5" fill="none" opacity="0.35"></path>
+    <!-- rolling green mountains - older/rounder -->
+    <path d="M0 118 Q80 70 160 90 Q230 108 300 75 Q370 42 440 70 Q510 98 580 65 Q640 40 700 72 L700 120 L0 120Z" fill="#5a7a3a" opacity="0.55"></path>
+    <path d="M0 125 Q80 85 170 100 Q260 115 340 85 Q410 58 480 82 Q550 106 620 80 Q660 65 700 88 L700 130 L0 130Z" fill="#3d5c28"></path>
+    <!-- cliff face -->
+    <path d="M420 80 L440 70 L460 78 L470 90 L468 110 L425 110 L418 95Z" fill="#8b7355"></path>
+    <path d="M430 78 L445 68 L455 76 L462 88 L460 105 L432 105Z" fill="#7a6345" opacity="0.6"></path>
+    <!-- coastal cliffs -->
+    <path d="M0 130 L0 110 L50 100 L60 112 L80 108 L90 118 L130 110 L140 125 L180 118 L190 128 L0 130Z" fill="#9e8b6e"></path>
+    <!-- lighthouse -->
+    <rect x="90" y="88" width="10" height="22" fill="#e8e0d0"></rect>
+    <polygon points="85,88 95,78 105,88" fill="#c0392b"></polygon>
+    <rect x="88" y="88" width="14" height="5" fill="#aaa"></rect>
+    <circle cx="95" cy="83" r="3" fill="#ffe082" opacity="0.8"></circle>
+    <!-- trees on cliffs -->
+    <g fill="#2d4a1a">
+      <polygon points="140,100 150,80 160,100"></polygon><polygon points="165,96 175,76 185,96"></polygon>
+      <polygon points="540,74 550,55 560,74"></polygon><polygon points="580,68 592,46 604,68"></polygon>
+    </g>
+    <!-- whale tail in water -->
+    <path d="M260 130 Q270 120 280 130 Q285 138 275 142 Q265 145 255 140Z" fill="#2d3a4a" opacity="0.7"></path>
+    <!-- sun and clouds -->
+    <circle cx="630" cy="28" r="24" fill="#ffe082" opacity="0.85"></circle>
+    <ellipse cx="180" cy="22" rx="70" ry="18" fill="#fff" opacity="0.7"></ellipse>
+    <ellipse cx="430" cy="16" rx="55" ry="15" fill="#fff" opacity="0.55"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🌊 Appalachian Region</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;great-lakes&#39;)" aria-label="Open Great Lakes &amp; St. Lawrence Lowlands">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="sky4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8c8e8"></stop><stop offset="100%" stop-color="#d4e8f8"></stop></lineargradient>
+    <lineargradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a8fc8"></stop><stop offset="100%" stop-color="#1a6a9a"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky4)"></rect>
+    <!-- lake water -->
+    <ellipse cx="350" cy="140" rx="320" ry="65" fill="url(#lake)" opacity="0.85"></ellipse>
+    <ellipse cx="350" cy="145" rx="310" ry="55" fill="#2a7ab8" opacity="0.5"></ellipse>
+    <!-- wave lines -->
+    <path d="M80 138 Q120 130 160 138 Q200 146 240 138 Q280 130 320 138 Q360 146 400 138 Q440 130 480 138 Q520 146 560 138 Q600 130 620 138" stroke="#5ab8e8" stroke-width="1.5" fill="none" opacity="0.6"></path>
+    <path d="M100 148 Q140 140 180 148 Q220 156 260 148 Q300 140 340 148 Q380 156 420 148 Q460 140 500 148 Q540 156 580 148" stroke="#5ab8e8" stroke-width="1" fill="none" opacity="0.4"></path>
+    <!-- land masses around lake -->
+    <path d="M0 180 L0 100 Q60 95 130 105 Q180 112 220 100 Q240 94 260 98 L260 110 Q240 120 200 115 Q160 110 140 120 Q100 135 80 145 L80 180Z" fill="#5a8a3a"></path>
+    <path d="M700 180 L700 95 Q650 90 600 98 Q560 104 530 95 Q510 88 490 95 L490 108 Q510 118 550 112 Q590 106 620 118 Q660 132 680 148 L680 180Z" fill="#5a8a3a"></path>
+    <!-- Toronto cityscape sketch -->
+    <g fill="#3d5c7a" opacity="0.8">
+      <rect x="580" y="50" width="8" height="55"></rect>
+      <rect x="555" y="65" width="10" height="40"></rect>
+      <rect x="570" y="60" width="6" height="45"></rect>
+      <rect x="595" y="70" width="10" height="35"></rect>
+      <rect x="610" y="75" width="8" height="30"></rect>
+      <rect x="620" y="68" width="7" height="37"></rect>
+      <rect x="630" y="72" width="9" height="33"></rect>
+      <rect x="645" y="78" width="7" height="27"></rect>
+      <rect x="655" y="65" width="10" height="40"></rect>
+      <rect x="670" y="80" width="6" height="25"></rect>
+      <!-- CN Tower -->
+      <rect x="583" y="28" width="3" height="22"></rect>
+      <ellipse cx="584" cy="45" rx="5" ry="3" fill="#3d5c7a"></ellipse>
+    </g>
+    <!-- sailboat -->
+    <polygon points="320,115 330,90 340,115" fill="#fff" opacity="0.8"></polygon>
+    <line x1="330" y1="115" x2="330" y2="90" stroke="#8b6b3a" stroke-width="1.5"></line>
+    <rect x="322" y="118" width="16" height="4" rx="2" fill="#8b6b3a"></rect>
+    <!-- farm fields near shore -->
+    <path d="M0 180 L0 145 Q80 135 150 148 Q180 155 260 148 Q260 160 260 180Z" fill="#7ab648" opacity="0.6"></path>
+    <!-- sun + clouds -->
+    <circle cx="80" cy="28" r="26" fill="#ffe082" opacity="0.85"></circle>
+    <ellipse cx="300" cy="20" rx="80" ry="20" fill="#fff" opacity="0.7"></ellipse>
+    <ellipse cx="520" cy="30" rx="60" ry="16" fill="#fff" opacity="0.6"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🏙️ Great Lakes &amp; St. Lawrence Lowlands</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;arctic-lands&#39;)" aria-label="Open Arctic Lands">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="sky5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2a4a"></stop><stop offset="100%" stop-color="#2a3a6a"></stop></lineargradient>
+    <lineargradient id="snow2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0f4ff"></stop><stop offset="100%" stop-color="#d0daf0"></stop></lineargradient>
+    <lineargradient id="ice" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c8e8f8"></stop><stop offset="100%" stop-color="#88b8d8"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky5)"></rect>
+    <!-- aurora borealis -->
+    <path d="M0 40 Q175 10 350 30 Q525 50 700 20" stroke="#00ff88" stroke-width="3" fill="none" opacity="0.35"></path>
+    <path d="M0 55 Q175 25 350 45 Q525 65 700 35" stroke="#00ccff" stroke-width="2.5" fill="none" opacity="0.3"></path>
+    <path d="M0 30 Q175 5 350 22 Q525 40 700 12" stroke="#88ff44" stroke-width="2" fill="none" opacity="0.2"></path>
+    <!-- stars -->
+    <circle cx="50" cy="15" r="1.2" fill="#fff" opacity="0.8"></circle>
+    <circle cx="130" cy="8" r="1" fill="#fff" opacity="0.7"></circle>
+    <circle cx="210" cy="20" r="1.5" fill="#fff" opacity="0.9"></circle>
+    <circle cx="290" cy="10" r="1" fill="#fff" opacity="0.6"></circle>
+    <circle cx="450" cy="12" r="1.2" fill="#fff" opacity="0.8"></circle>
+    <circle cx="540" cy="5" r="1" fill="#fff" opacity="0.7"></circle>
+    <circle cx="610" cy="18" r="1.5" fill="#fff" opacity="0.85"></circle>
+    <circle cx="680" cy="8" r="1" fill="#fff" opacity="0.6"></circle>
+    <!-- icebergs in water -->
+    <ellipse cx="350" cy="160" rx="340" ry="30" fill="#1a3a5a" opacity="0.7"></ellipse>
+    <path d="M80 155 L100 130 L120 155Z" fill="url(#ice)"></path>
+    <path d="M85 155 L100 135 L115 155Z" fill="#c8e8f8" opacity="0.4"></path>
+    <path d="M200 158 L225 128 L255 158Z" fill="url(#ice)"></path>
+    <path d="M450 160 L470 138 L490 160Z" fill="url(#ice)"></path>
+    <path d="M580 155 L605 132 L630 155Z" fill="url(#ice)"></path>
+    <!-- snow-covered ground -->
+    <path d="M0 130 Q100 118 200 122 Q300 126 400 118 Q500 110 600 116 Q660 120 700 115 L700 180 L0 180Z" fill="url(#snow2)"></path>
+    <!-- snow bumps / drifts -->
+    <ellipse cx="150" cy="133" rx="80" ry="18" fill="#e8f0ff" opacity="0.7"></ellipse>
+    <ellipse cx="420" cy="128" rx="100" ry="20" fill="#e8f0ff" opacity="0.6"></ellipse>
+    <ellipse cx="620" cy="132" rx="70" ry="16" fill="#e8f0ff" opacity="0.65"></ellipse>
+    <!-- polar bear silhouette -->
+    <g fill="#f0f0f0" opacity="0.9">
+      <ellipse cx="340" cy="138" rx="28" ry="16"></ellipse>
+      <circle cx="363" cy="130" r="12"></circle>
+      <ellipse cx="372" cy="126" rx="6" ry="4"></ellipse>
+      <ellipse cx="318" cy="150" rx="7" ry="4" transform="rotate(-10,318,150)"></ellipse>
+      <ellipse cx="332" cy="152" rx="7" ry="4" transform="rotate(-5,332,152)"></ellipse>
+      <ellipse cx="350" cy="152" rx="7" ry="4" transform="rotate(5,350,152)"></ellipse>
+      <ellipse cx="364" cy="150" rx="7" ry="4" transform="rotate(10,364,150)"></ellipse>
+    </g>
+    <!-- moon instead of sun -->
+    <circle cx="640" cy="25" r="22" fill="#f0f0d8" opacity="0.85"></circle>
+    <circle cx="650" cy="18" r="16" fill="url(#sky5)" opacity="0.5"></circle>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🧊 Arctic Lands</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button><button class="region-card " onclick="openRegion(&#39;hudson-bay&#39;)" aria-label="Open Hudson Bay Lowlands">
+      <div class="card-img"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><lineargradient id="sky6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#78b0c8"></stop><stop offset="100%" stop-color="#b8d8e8"></stop></lineargradient>
+    <lineargradient id="bay" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a7898"></stop><stop offset="100%" stop-color="#1a5878"></stop></lineargradient>
+    <lineargradient id="wetland" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a7a3a"></stop><stop offset="100%" stop-color="#3a5a2a"></stop></lineargradient></defs>
+    <rect width="700" height="180" fill="url(#sky6)"></rect>
+    <!-- hudson bay water -->
+    <ellipse cx="350" cy="85" rx="290" ry="72" fill="url(#bay)" opacity="0.75"></ellipse>
+    <!-- bay shimmer -->
+    <ellipse cx="350" cy="88" rx="270" ry="62" fill="#3a8aaa" opacity="0.35"></ellipse>
+    <!-- water reflections -->
+    <path d="M120 85 Q175 78 230 85 Q285 92 340 85 Q395 78 450 85 Q505 92 570 85" stroke="#5aaac8" stroke-width="1.5" fill="none" opacity="0.5"></path>
+    <path d="M140 95 Q195 88 250 95 Q305 102 360 95 Q415 88 470 95 Q520 102 560 95" stroke="#5aaac8" stroke-width="1" fill="none" opacity="0.35"></path>
+    <!-- wetland / peatland shore -->
+    <path d="M0 180 L0 100 Q60 90 130 105 Q160 112 190 108 Q210 104 240 108 L250 155 Q200 162 140 158 Q80 154 40 168Z" fill="url(#wetland)"></path>
+    <path d="M700 180 L700 98 Q640 88 580 102 Q555 108 530 104 Q512 100 498 106 L490 158 Q540 164 600 160 Q650 156 680 168Z" fill="url(#wetland)"></path>
+    <!-- bottom wetland -->
+    <path d="M0 180 L240 180 L240 158 Q200 152 160 155 Q80 160 0 155Z" fill="#5a8a3a" opacity="0.7"></path>
+    <path d="M460 180 L700 180 L700 155 Q660 148 620 152 Q560 158 490 155 L490 180Z" fill="#5a8a3a" opacity="0.7"></path>
+    <!-- marsh grass / reeds -->
+    <g stroke="#4a6a2a" stroke-width="1.5" fill="none">
+      <line x1="50" y1="140" x2="50" y2="108"></line><ellipse cx="50" cy="106" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="75" y1="138" x2="75" y2="106"></line><ellipse cx="75" cy="104" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="100" y1="142" x2="100" y2="110"></line><ellipse cx="100" cy="108" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="125" y1="140" x2="125" y2="108"></line><ellipse cx="125" cy="106" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="590" y1="138" x2="590" y2="106"></line><ellipse cx="590" cy="104" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="615" y1="140" x2="615" y2="108"></line><ellipse cx="615" cy="106" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="640" y1="138" x2="640" y2="106"></line><ellipse cx="640" cy="104" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+      <line x1="665" y1="142" x2="665" y2="110"></line><ellipse cx="665" cy="108" rx="4" ry="7" fill="#5a7a2a"></ellipse>
+    </g>
+    <!-- polar bears on shore -->
+    <g fill="#f8f8f8" opacity="0.9">
+      <ellipse cx="280" cy="155" rx="20" ry="11"></ellipse>
+      <circle cx="296" cy="148" r="9"></circle>
+      <ellipse cx="304" cy="145" rx="5" ry="3"></ellipse>
+      <!-- paws -->
+      <ellipse cx="268" cy="163" rx="5" ry="3"></ellipse>
+      <ellipse cx="278" cy="164" rx="5" ry="3"></ellipse>
+      <ellipse cx="292" cy="164" rx="5" ry="3"></ellipse>
+      <ellipse cx="302" cy="162" rx="5" ry="3"></ellipse>
+    </g>
+    <!-- small polar bear cub -->
+    <g fill="#f8f8f8" opacity="0.85">
+      <ellipse cx="245" cy="158" rx="12" ry="8"></ellipse>
+      <circle cx="255" cy="153" r="6"></circle>
+    </g>
+    <!-- small wetland pool -->
+    <ellipse cx="180" cy="145" rx="35" ry="10" fill="#3a8aaa" opacity="0.5"></ellipse>
+    <ellipse cx="530" cy="148" rx="28" ry="8" fill="#3a8aaa" opacity="0.45"></ellipse>
+    <!-- sun + clouds -->
+    <circle cx="100" cy="28" r="24" fill="#ffe082" opacity="0.8"></circle>
+    <ellipse cx="330" cy="18" rx="80" ry="20" fill="#fff" opacity="0.7"></ellipse>
+    <ellipse cx="580" cy="28" rx="60" ry="16" fill="#fff" opacity="0.6"></ellipse>
+  </svg></div>
+      <div class="card-body">
+        <div class="card-name">🦭 Hudson Bay Lowlands</div>
+        <div class="card-status">Tap to start →</div>
+      </div>
+    </button></div>
+</div>
+
+<!-- REGION DETAIL -->
+<div class="screen" id="region-screen">
+  <button class="back-btn" onclick="goHome()">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"></path></svg>
+    All regions
+  </button>
+  <div id="region-content"><div class="detail-card"><div class="region-hero"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="180" fill="#c8e6d4"></rect>
+    <ellipse cx="350" cy="250" rx="400" ry="160" fill="#7db87d" opacity="0.4"></ellipse>
+    <rect x="0" y="110" width="700" height="70" fill="#5a8a5a"></rect>
+    <rect x="0" y="130" width="700" height="50" fill="#4a7a4a"></rect>
+    <!-- water reflections -->
+    <ellipse cx="120" cy="118" rx="55" ry="12" fill="#7ecbdc" opacity="0.85"></ellipse>
+    <ellipse cx="380" cy="122" rx="70" ry="14" fill="#7ecbdc" opacity="0.8"></ellipse>
+    <ellipse cx="580" cy="115" rx="45" ry="10" fill="#7ecbdc" opacity="0.8"></ellipse>
+    <!-- bedrock slabs -->
+    <path d="M0 108 Q60 96 130 102 Q200 108 270 98 Q340 88 420 100 Q500 112 570 104 Q640 96 700 108 L700 130 L0 130Z" fill="#8b7355"></path>
+    <path d="M0 118 Q80 108 160 114 Q240 120 310 110 Q380 100 450 110 Q520 120 600 112 Q660 104 700 118 L700 135 L0 135Z" fill="#9e8b6e" opacity="0.6"></path>
+    <!-- trees -->
+    <g fill="#2d5a2d">
+      <polygon points="50,100 65,70 80,100"></polygon><rect x="62" y="99" width="6" height="12" fill="#5c3d2e"></rect>
+      <polygon points="100,98 118,62 136,98"></polygon><rect x="114" y="97" width="8" height="13" fill="#5c3d2e"></rect>
+      <polygon points="160,104 175,75 190,104"></polygon><rect x="171" y="103" width="6" height="11" fill="#5c3d2e"></rect>
+      <polygon points="490,100 507,68 524,100"></polygon><rect x="503" y="99" width="8" height="12" fill="#5c3d2e"></rect>
+      <polygon points="550,96 565,68 580,96"></polygon><rect x="561" y="95" width="6" height="11" fill="#5c3d2e"></rect>
+      <polygon points="620,102 635,72 650,102"></polygon><rect x="631" y="101" width="6" height="12" fill="#5c3d2e"></rect>
+    </g>
+    <!-- rolling hills silhouette -->
+    <path d="M0 130 Q50 100 120 110 Q180 118 250 105 Q320 92 390 108 Q460 122 540 108 Q610 94 700 115 L700 180 L0 180Z" fill="#3d6b3d"></path>
+    <!-- sky gradient elements -->
+    <circle cx="600" cy="30" r="28" fill="#ffe082" opacity="0.7"></circle>
+    <ellipse cx="200" cy="25" rx="70" ry="20" fill="#fff" opacity="0.5"></ellipse>
+    <ellipse cx="420" cy="18" rx="55" ry="16" fill="#fff" opacity="0.4"></ellipse>
+    <ellipse cx="100" cy="35" rx="45" ry="14" fill="#fff" opacity="0.35"></ellipse>
+  </svg><div class="region-hero-label">Canadian Shield</div></div><div class="stepper">
+    
+      
+      <div class="step-dot done-step" onclick="jumpStep(0)" title="Facts" aria-label="Step 1: Facts">
+        ✓
+      </div>
+      <div class="step-line done-line"></div>
+      <div class="step-dot done-step" onclick="jumpStep(1)" title="Formation" aria-label="Step 2: Formation">
+        ✓
+      </div>
+      <div class="step-line done-line"></div>
+      <div class="step-dot done-step" onclick="jumpStep(2)" title="Indigenous" aria-label="Step 3: Indigenous">
+        ✓
+      </div>
+      <div class="step-line done-line"></div>
+      <div class="step-dot done-step" onclick="jumpStep(3)" title="Q1" aria-label="Step 4: Q1">
+        ✓
+      </div>
+      <div class="step-line done-line"></div>
+      <div class="step-dot done-step" onclick="jumpStep(4)" title="Q2" aria-label="Step 5: Q2">
+        ✓
+      </div>
+      <div class="step-line done-line"></div>
+      <div class="step-dot active" onclick="jumpStep(5)" title="Q3" aria-label="Step 6: Q3">
+        6
+      </div>
+      <div class="step-line "></div>
+      <div class="step-dot " onclick="jumpStep(6)" title="Q4" aria-label="Step 7: Q4">
+        7
+      </div>
+      <div class="step-line "></div>
+      <div class="step-dot " onclick="jumpStep(7)" title="Q5" aria-label="Step 8: Q5">
+        8
+      </div>
+  </div><div class="step-body">
+    <p class="q-label"><span class="q-num">3</span> Which glacier shaped the Canadian Shield thousands of years ago?</p>
+    <div class="hint-box"><span class="hint-icon">💡</span><span>Check the 'How was it formed?' section.</span></div>
+    <div class="chip-group">
+      <button class="chip locked" onclick="selectChip(this,&#39;Rocky Mountain Glacier&#39;,2)">Rocky Mountain Glacier</button><button class="chip selected locked" onclick="selectChip(this,&#39;Laurentide Ice Sheet&#39;,2)">Laurentide Ice Sheet</button><button class="chip locked" onclick="selectChip(this,&#39;Arctic Ice Cap&#39;,2)">Arctic Ice Cap</button><button class="chip locked" onclick="selectChip(this,&#39;Cordillera Glacier&#39;,2)">Cordillera Glacier</button>
+    </div>
+    <div class="feedback good show" id="fb-2">
+      <span class="feedback-icon">✅</span>
+      <span>Correct! The Laurentide Ice Sheet carved out the dips that became the Shield's thousands of lakes.</span>
+    </div>
+  </div><div class="nav-row">
+    <button class="btn btn-outline" onclick="jumpStep(4)">← Back</button>
+    <button class="btn btn-primary" onclick="jumpStep(6)">Next →</button>
+  </div></div></div>
+</div>
+
+<!-- DONE -->
+<div class="screen" id="done-screen">
+  <div class="done-banner">
+    <span class="trophy">🏆</span>
+    <h2>All 7 regions complete!</h2>
+    <p>Excellent work — your digital fact file is finished.</p>
+  </div>
+  <div class="stats-grid" id="stats-grid"></div>
+
+  <div class="submit-card">
+    <h3 style="margin-bottom:0.35rem">📄 Create your summary to hand in</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Enter your name below, then click <strong>Generate My Summary</strong>. A print-ready page will open — save it as a PDF and submit it to Google Classroom.</p>
+    <div>
+      <label for="student-name" style="font-size:0.82rem;font-weight:700;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em">Your name</label>
+      <input type="text" id="student-name" class="name-input" placeholder="First and last name" autocomplete="name">
+    </div>
+    <div style="margin-top:0.75rem">
+      <label for="student-date" style="font-size:0.82rem;font-weight:700;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.04em">Today's date</label>
+      <input type="text" id="student-date" class="name-input" placeholder="e.g. May 6, 2026">
+    </div>
+    <button class="btn btn-primary" onclick="generateSummary()" style="margin-top:1rem;width:100%;justify-content:center;font-size:1rem;padding:12px 20px;">
+      🖨️ Generate My Summary
+    </button>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:0.6rem;text-align:center">A new tab will open. Use <strong>File → Print</strong> (or Ctrl+P / ⌘+P) and choose <strong>Save as PDF</strong>.</p>
+  </div>
+
+  <button class="btn btn-outline" onclick="goHome()" style="width:100%;justify-content:center;margin-top:0.75rem;">← Back to regions</button>
+</div>
+
+<!-- PRINT SUMMARY (hidden until generateSummary() is called in a new tab) -->
+<div id="print-summary"></div>
+
+</main>
+
+<script>
+// ─────────────────────────────────────────────
+// SVG ILLUSTRATIONS — one per region
+// ─────────────────────────────────────────────
+const SVGS = {
+  "canadian-shield": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <rect width="700" height="180" fill="#c8e6d4"/>
+    <ellipse cx="350" cy="250" rx="400" ry="160" fill="#7db87d" opacity="0.4"/>
+    <rect x="0" y="110" width="700" height="70" fill="#5a8a5a"/>
+    <rect x="0" y="130" width="700" height="50" fill="#4a7a4a"/>
+    <!-- water reflections -->
+    <ellipse cx="120" cy="118" rx="55" ry="12" fill="#7ecbdc" opacity="0.85"/>
+    <ellipse cx="380" cy="122" rx="70" ry="14" fill="#7ecbdc" opacity="0.8"/>
+    <ellipse cx="580" cy="115" rx="45" ry="10" fill="#7ecbdc" opacity="0.8"/>
+    <!-- bedrock slabs -->
+    <path d="M0 108 Q60 96 130 102 Q200 108 270 98 Q340 88 420 100 Q500 112 570 104 Q640 96 700 108 L700 130 L0 130Z" fill="#8b7355"/>
+    <path d="M0 118 Q80 108 160 114 Q240 120 310 110 Q380 100 450 110 Q520 120 600 112 Q660 104 700 118 L700 135 L0 135Z" fill="#9e8b6e" opacity="0.6"/>
+    <!-- trees -->
+    <g fill="#2d5a2d">
+      <polygon points="50,100 65,70 80,100"/><rect x="62" y="99" width="6" height="12" fill="#5c3d2e"/>
+      <polygon points="100,98 118,62 136,98"/><rect x="114" y="97" width="8" height="13" fill="#5c3d2e"/>
+      <polygon points="160,104 175,75 190,104"/><rect x="171" y="103" width="6" height="11" fill="#5c3d2e"/>
+      <polygon points="490,100 507,68 524,100"/><rect x="503" y="99" width="8" height="12" fill="#5c3d2e"/>
+      <polygon points="550,96 565,68 580,96"/><rect x="561" y="95" width="6" height="11" fill="#5c3d2e"/>
+      <polygon points="620,102 635,72 650,102"/><rect x="631" y="101" width="6" height="12" fill="#5c3d2e"/>
+    </g>
+    <!-- rolling hills silhouette -->
+    <path d="M0 130 Q50 100 120 110 Q180 118 250 105 Q320 92 390 108 Q460 122 540 108 Q610 94 700 115 L700 180 L0 180Z" fill="#3d6b3d"/>
+    <!-- sky gradient elements -->
+    <circle cx="600" cy="30" r="28" fill="#ffe082" opacity="0.7"/>
+    <ellipse cx="200" cy="25" rx="70" ry="20" fill="#fff" opacity="0.5"/>
+    <ellipse cx="420" cy="18" rx="55" ry="16" fill="#fff" opacity="0.4"/>
+    <ellipse cx="100" cy="35" rx="45" ry="14" fill="#fff" opacity="0.35"/>
+  </svg>`,
+
+  "western-cordillera": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87ceeb"/><stop offset="100%" stop-color="#c8e6f5"/></linearGradient>
+    <linearGradient id="snow1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#ddeeff"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky1)"/>
+    <!-- far mountains -->
+    <path d="M0 130 L60 60 L120 100 L180 40 L240 90 L300 30 L360 80 L420 20 L480 70 L540 35 L600 75 L660 45 L700 80 L700 180 L0 180Z" fill="#9db8c8" opacity="0.5"/>
+    <!-- mid mountains -->
+    <path d="M0 150 L80 80 L150 120 L220 55 L300 100 L380 45 L460 95 L520 50 L580 90 L640 60 L700 100 L700 180 L0 180Z" fill="#6b8fa8"/>
+    <!-- snow caps -->
+    <path d="M220 55 L237 75 L244 70 L252 78 L260 65 L270 75 L280 60 L295 82 L300 100 L220 55Z" fill="url(#snow1)" opacity="0.9"/>
+    <path d="M380 45 L395 68 L402 62 L410 72 L420 56 L430 70 L440 58 L452 78 L460 95 L380 45Z" fill="url(#snow1)" opacity="0.9"/>
+    <path d="M520 50 L535 72 L542 65 L550 76 L558 60 L568 74 L580 90 L520 50Z" fill="url(#snow1)" opacity="0.85"/>
+    <!-- foreground mountains -->
+    <path d="M0 180 L100 110 L180 150 L260 90 L340 135 L420 80 L500 125 L580 95 L660 130 L700 110 L700 180Z" fill="#3d5c6b"/>
+    <!-- glacier -->
+    <path d="M260 90 L275 105 L272 118 L268 115 L265 122 L260 118 L255 125 L252 120 L248 126 L244 118 L240 122 L236 112 L240 100 L250 94Z" fill="#c8e8f8" opacity="0.85"/>
+    <!-- forest at base -->
+    <path d="M0 180 L0 155 Q50 140 100 148 Q180 158 260 145 Q340 132 420 148 Q500 162 580 150 Q640 142 700 152 L700 180Z" fill="#2d4a2d"/>
+    <!-- lake reflection -->
+    <ellipse cx="170" cy="165" rx="60" ry="12" fill="#7ecbdc" opacity="0.7"/>
+    <!-- sun -->
+    <circle cx="640" cy="28" r="22" fill="#ffe082" opacity="0.9"/>
+    <!-- clouds -->
+    <ellipse cx="100" cy="22" rx="65" ry="18" fill="#fff" opacity="0.7"/>
+    <ellipse cx="380" cy="15" rx="50" ry="14" fill="#fff" opacity="0.6"/>
+  </svg>`,
+
+  "interior-plains": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#87ceeb"/><stop offset="100%" stop-color="#d4edf7"/></linearGradient>
+    <linearGradient id="wheat" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842"/><stop offset="100%" stop-color="#d4952a"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky2)"/>
+    <!-- horizon line hills -->
+    <path d="M0 100 Q100 92 200 98 Q300 104 400 96 Q500 88 600 94 Q660 98 700 96 L700 180 L0 180Z" fill="#7ab648" opacity="0.4"/>
+    <!-- wheat fields in strips -->
+    <rect x="0" y="108" width="700" height="72" fill="#c8960a" opacity="0.25"/>
+    <path d="M0 115 Q175 108 350 115 Q525 122 700 115 L700 145 L0 145Z" fill="url(#wheat)" opacity="0.55"/>
+    <path d="M0 140 Q175 133 350 140 Q525 147 700 140 L700 180 L0 180Z" fill="#8a6520" opacity="0.5"/>
+    <!-- wheat stalks -->
+    <g stroke="#d4952a" stroke-width="1.2" opacity="0.8">
+      <line x1="20" y1="135" x2="20" y2="115"/><ellipse cx="20" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="45" y1="133" x2="45" y2="113"/><ellipse cx="45" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="70" y1="135" x2="70" y2="115"/><ellipse cx="70" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="95" y1="132" x2="95" y2="112"/><ellipse cx="95" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="120" y1="134" x2="120" y2="114"/><ellipse cx="120" cy="112" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="145" y1="133" x2="145" y2="113"/><ellipse cx="145" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="170" y1="136" x2="170" y2="116"/><ellipse cx="170" cy="114" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="195" y1="132" x2="195" y2="112"/><ellipse cx="195" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="220" y1="135" x2="220" y2="115"/><ellipse cx="220" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="245" y1="133" x2="245" y2="113"/><ellipse cx="245" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="270" y1="134" x2="270" y2="114"/><ellipse cx="270" cy="112" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="295" y1="132" x2="295" y2="112"/><ellipse cx="295" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="320" y1="135" x2="320" y2="115"/><ellipse cx="320" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="345" y1="133" x2="345" y2="113"/><ellipse cx="345" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="370" y1="136" x2="370" y2="116"/><ellipse cx="370" cy="114" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="395" y1="132" x2="395" y2="112"/><ellipse cx="395" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="420" y1="135" x2="420" y2="115"/><ellipse cx="420" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="445" y1="133" x2="445" y2="113"/><ellipse cx="445" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="470" y1="134" x2="470" y2="114"/><ellipse cx="470" cy="112" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="495" y1="132" x2="495" y2="112"/><ellipse cx="495" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="520" y1="135" x2="520" y2="115"/><ellipse cx="520" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="545" y1="133" x2="545" y2="113"/><ellipse cx="545" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="570" y1="136" x2="570" y2="116"/><ellipse cx="570" cy="114" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="595" y1="132" x2="595" y2="112"/><ellipse cx="595" cy="110" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="620" y1="135" x2="620" y2="115"/><ellipse cx="620" cy="113" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="645" y1="133" x2="645" y2="113"/><ellipse cx="645" cy="111" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="670" y1="134" x2="670" y2="114"/><ellipse cx="670" cy="112" rx="3" ry="5" fill="#f5c842"/>
+      <line x1="695" y1="132" x2="695" y2="112"/><ellipse cx="695" cy="110" rx="3" ry="5" fill="#f5c842"/>
+    </g>
+    <!-- farm road -->
+    <path d="M340 180 L350 108 L360 108 L370 180Z" fill="#c8a060" opacity="0.5"/>
+    <!-- grain elevator -->
+    <rect x="500" y="60" width="30" height="55" fill="#c8a060"/>
+    <rect x="495" y="55" width="40" height="10" fill="#b08040"/>
+    <polygon points="495,55 515,40 535,55" fill="#8a6020"/>
+    <rect x="508" y="85" width="10" height="30" fill="#7a5010"/>
+    <!-- sun -->
+    <circle cx="80" cy="25" r="22" fill="#ffe082" opacity="0.9"/>
+    <!-- clouds -->
+    <ellipse cx="280" cy="20" rx="75" ry="18" fill="#fff" opacity="0.75"/>
+    <ellipse cx="560" cy="30" rx="55" ry="15" fill="#fff" opacity="0.6"/>
+  </svg>`,
+
+  "appalachian": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a6b8a"/><stop offset="100%" stop-color="#0d4a68"/></linearGradient>
+    <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6eb5d4"/><stop offset="100%" stop-color="#a8d8ea"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky3)"/>
+    <!-- ocean -->
+    <rect x="0" y="110" width="700" height="70" fill="url(#ocean)"/>
+    <!-- ocean waves -->
+    <path d="M0 115 Q35 108 70 115 Q105 122 140 115 Q175 108 210 115 Q245 122 280 115 Q315 108 350 115 Q385 122 420 115 Q455 108 490 115 Q525 122 560 115 Q595 108 630 115 Q665 122 700 115" stroke="#5bb8d4" stroke-width="2" fill="none" opacity="0.5"/>
+    <path d="M0 125 Q35 118 70 125 Q105 132 140 125 Q175 118 210 125 Q245 132 280 125 Q315 118 350 125 Q385 132 420 125 Q455 118 490 125 Q525 132 560 125 Q595 118 630 125 Q665 132 700 125" stroke="#5bb8d4" stroke-width="1.5" fill="none" opacity="0.35"/>
+    <!-- rolling green mountains - older/rounder -->
+    <path d="M0 118 Q80 70 160 90 Q230 108 300 75 Q370 42 440 70 Q510 98 580 65 Q640 40 700 72 L700 120 L0 120Z" fill="#5a7a3a" opacity="0.55"/>
+    <path d="M0 125 Q80 85 170 100 Q260 115 340 85 Q410 58 480 82 Q550 106 620 80 Q660 65 700 88 L700 130 L0 130Z" fill="#3d5c28"/>
+    <!-- cliff face -->
+    <path d="M420 80 L440 70 L460 78 L470 90 L468 110 L425 110 L418 95Z" fill="#8b7355"/>
+    <path d="M430 78 L445 68 L455 76 L462 88 L460 105 L432 105Z" fill="#7a6345" opacity="0.6"/>
+    <!-- coastal cliffs -->
+    <path d="M0 130 L0 110 L50 100 L60 112 L80 108 L90 118 L130 110 L140 125 L180 118 L190 128 L0 130Z" fill="#9e8b6e"/>
+    <!-- lighthouse -->
+    <rect x="90" y="88" width="10" height="22" fill="#e8e0d0"/>
+    <polygon points="85,88 95,78 105,88" fill="#c0392b"/>
+    <rect x="88" y="88" width="14" height="5" fill="#aaa"/>
+    <circle cx="95" cy="83" r="3" fill="#ffe082" opacity="0.8"/>
+    <!-- trees on cliffs -->
+    <g fill="#2d4a1a">
+      <polygon points="140,100 150,80 160,100"/><polygon points="165,96 175,76 185,96"/>
+      <polygon points="540,74 550,55 560,74"/><polygon points="580,68 592,46 604,68"/>
+    </g>
+    <!-- whale tail in water -->
+    <path d="M260 130 Q270 120 280 130 Q285 138 275 142 Q265 145 255 140Z" fill="#2d3a4a" opacity="0.7"/>
+    <!-- sun and clouds -->
+    <circle cx="630" cy="28" r="24" fill="#ffe082" opacity="0.85"/>
+    <ellipse cx="180" cy="22" rx="70" ry="18" fill="#fff" opacity="0.7"/>
+    <ellipse cx="430" cy="16" rx="55" ry="15" fill="#fff" opacity="0.55"/>
+  </svg>`,
+
+  "great-lakes": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8c8e8"/><stop offset="100%" stop-color="#d4e8f8"/></linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3a8fc8"/><stop offset="100%" stop-color="#1a6a9a"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky4)"/>
+    <!-- lake water -->
+    <ellipse cx="350" cy="140" rx="320" ry="65" fill="url(#lake)" opacity="0.85"/>
+    <ellipse cx="350" cy="145" rx="310" ry="55" fill="#2a7ab8" opacity="0.5"/>
+    <!-- wave lines -->
+    <path d="M80 138 Q120 130 160 138 Q200 146 240 138 Q280 130 320 138 Q360 146 400 138 Q440 130 480 138 Q520 146 560 138 Q600 130 620 138" stroke="#5ab8e8" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <path d="M100 148 Q140 140 180 148 Q220 156 260 148 Q300 140 340 148 Q380 156 420 148 Q460 140 500 148 Q540 156 580 148" stroke="#5ab8e8" stroke-width="1" fill="none" opacity="0.4"/>
+    <!-- land masses around lake -->
+    <path d="M0 180 L0 100 Q60 95 130 105 Q180 112 220 100 Q240 94 260 98 L260 110 Q240 120 200 115 Q160 110 140 120 Q100 135 80 145 L80 180Z" fill="#5a8a3a"/>
+    <path d="M700 180 L700 95 Q650 90 600 98 Q560 104 530 95 Q510 88 490 95 L490 108 Q510 118 550 112 Q590 106 620 118 Q660 132 680 148 L680 180Z" fill="#5a8a3a"/>
+    <!-- Toronto cityscape sketch -->
+    <g fill="#3d5c7a" opacity="0.8">
+      <rect x="580" y="50" width="8" height="55"/>
+      <rect x="555" y="65" width="10" height="40"/>
+      <rect x="570" y="60" width="6" height="45"/>
+      <rect x="595" y="70" width="10" height="35"/>
+      <rect x="610" y="75" width="8" height="30"/>
+      <rect x="620" y="68" width="7" height="37"/>
+      <rect x="630" y="72" width="9" height="33"/>
+      <rect x="645" y="78" width="7" height="27"/>
+      <rect x="655" y="65" width="10" height="40"/>
+      <rect x="670" y="80" width="6" height="25"/>
+      <!-- CN Tower -->
+      <rect x="583" y="28" width="3" height="22"/>
+      <ellipse cx="584" cy="45" rx="5" ry="3" fill="#3d5c7a"/>
+    </g>
+    <!-- sailboat -->
+    <polygon points="320,115 330,90 340,115" fill="#fff" opacity="0.8"/>
+    <line x1="330" y1="115" x2="330" y2="90" stroke="#8b6b3a" stroke-width="1.5"/>
+    <rect x="322" y="118" width="16" height="4" rx="2" fill="#8b6b3a"/>
+    <!-- farm fields near shore -->
+    <path d="M0 180 L0 145 Q80 135 150 148 Q180 155 260 148 Q260 160 260 180Z" fill="#7ab648" opacity="0.6"/>
+    <!-- sun + clouds -->
+    <circle cx="80" cy="28" r="26" fill="#ffe082" opacity="0.85"/>
+    <ellipse cx="300" cy="20" rx="80" ry="20" fill="#fff" opacity="0.7"/>
+    <ellipse cx="520" cy="30" rx="60" ry="16" fill="#fff" opacity="0.6"/>
+  </svg>`,
+
+  "arctic-lands": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky5" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a2a4a"/><stop offset="100%" stop-color="#2a3a6a"/></linearGradient>
+    <linearGradient id="snow2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0f4ff"/><stop offset="100%" stop-color="#d0daf0"/></linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#c8e8f8"/><stop offset="100%" stop-color="#88b8d8"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky5)"/>
+    <!-- aurora borealis -->
+    <path d="M0 40 Q175 10 350 30 Q525 50 700 20" stroke="#00ff88" stroke-width="3" fill="none" opacity="0.35"/>
+    <path d="M0 55 Q175 25 350 45 Q525 65 700 35" stroke="#00ccff" stroke-width="2.5" fill="none" opacity="0.3"/>
+    <path d="M0 30 Q175 5 350 22 Q525 40 700 12" stroke="#88ff44" stroke-width="2" fill="none" opacity="0.2"/>
+    <!-- stars -->
+    <circle cx="50" cy="15" r="1.2" fill="#fff" opacity="0.8"/>
+    <circle cx="130" cy="8" r="1" fill="#fff" opacity="0.7"/>
+    <circle cx="210" cy="20" r="1.5" fill="#fff" opacity="0.9"/>
+    <circle cx="290" cy="10" r="1" fill="#fff" opacity="0.6"/>
+    <circle cx="450" cy="12" r="1.2" fill="#fff" opacity="0.8"/>
+    <circle cx="540" cy="5" r="1" fill="#fff" opacity="0.7"/>
+    <circle cx="610" cy="18" r="1.5" fill="#fff" opacity="0.85"/>
+    <circle cx="680" cy="8" r="1" fill="#fff" opacity="0.6"/>
+    <!-- icebergs in water -->
+    <ellipse cx="350" cy="160" rx="340" ry="30" fill="#1a3a5a" opacity="0.7"/>
+    <path d="M80 155 L100 130 L120 155Z" fill="url(#ice)"/>
+    <path d="M85 155 L100 135 L115 155Z" fill="#c8e8f8" opacity="0.4"/>
+    <path d="M200 158 L225 128 L255 158Z" fill="url(#ice)"/>
+    <path d="M450 160 L470 138 L490 160Z" fill="url(#ice)"/>
+    <path d="M580 155 L605 132 L630 155Z" fill="url(#ice)"/>
+    <!-- snow-covered ground -->
+    <path d="M0 130 Q100 118 200 122 Q300 126 400 118 Q500 110 600 116 Q660 120 700 115 L700 180 L0 180Z" fill="url(#snow2)"/>
+    <!-- snow bumps / drifts -->
+    <ellipse cx="150" cy="133" rx="80" ry="18" fill="#e8f0ff" opacity="0.7"/>
+    <ellipse cx="420" cy="128" rx="100" ry="20" fill="#e8f0ff" opacity="0.6"/>
+    <ellipse cx="620" cy="132" rx="70" ry="16" fill="#e8f0ff" opacity="0.65"/>
+    <!-- polar bear silhouette -->
+    <g fill="#f0f0f0" opacity="0.9">
+      <ellipse cx="340" cy="138" rx="28" ry="16"/>
+      <circle cx="363" cy="130" r="12"/>
+      <ellipse cx="372" cy="126" rx="6" ry="4"/>
+      <ellipse cx="318" cy="150" rx="7" ry="4" transform="rotate(-10,318,150)"/>
+      <ellipse cx="332" cy="152" rx="7" ry="4" transform="rotate(-5,332,152)"/>
+      <ellipse cx="350" cy="152" rx="7" ry="4" transform="rotate(5,350,152)"/>
+      <ellipse cx="364" cy="150" rx="7" ry="4" transform="rotate(10,364,150)"/>
+    </g>
+    <!-- moon instead of sun -->
+    <circle cx="640" cy="25" r="22" fill="#f0f0d8" opacity="0.85"/>
+    <circle cx="650" cy="18" r="16" fill="url(#sky5)" opacity="0.5"/>
+  </svg>`,
+
+  "hudson-bay": `<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="sky6" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#78b0c8"/><stop offset="100%" stop-color="#b8d8e8"/></linearGradient>
+    <linearGradient id="bay" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a7898"/><stop offset="100%" stop-color="#1a5878"/></linearGradient>
+    <linearGradient id="wetland" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4a7a3a"/><stop offset="100%" stop-color="#3a5a2a"/></linearGradient></defs>
+    <rect width="700" height="180" fill="url(#sky6)"/>
+    <!-- hudson bay water -->
+    <ellipse cx="350" cy="85" rx="290" ry="72" fill="url(#bay)" opacity="0.75"/>
+    <!-- bay shimmer -->
+    <ellipse cx="350" cy="88" rx="270" ry="62" fill="#3a8aaa" opacity="0.35"/>
+    <!-- water reflections -->
+    <path d="M120 85 Q175 78 230 85 Q285 92 340 85 Q395 78 450 85 Q505 92 570 85" stroke="#5aaac8" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M140 95 Q195 88 250 95 Q305 102 360 95 Q415 88 470 95 Q520 102 560 95" stroke="#5aaac8" stroke-width="1" fill="none" opacity="0.35"/>
+    <!-- wetland / peatland shore -->
+    <path d="M0 180 L0 100 Q60 90 130 105 Q160 112 190 108 Q210 104 240 108 L250 155 Q200 162 140 158 Q80 154 40 168Z" fill="url(#wetland)"/>
+    <path d="M700 180 L700 98 Q640 88 580 102 Q555 108 530 104 Q512 100 498 106 L490 158 Q540 164 600 160 Q650 156 680 168Z" fill="url(#wetland)"/>
+    <!-- bottom wetland -->
+    <path d="M0 180 L240 180 L240 158 Q200 152 160 155 Q80 160 0 155Z" fill="#5a8a3a" opacity="0.7"/>
+    <path d="M460 180 L700 180 L700 155 Q660 148 620 152 Q560 158 490 155 L490 180Z" fill="#5a8a3a" opacity="0.7"/>
+    <!-- marsh grass / reeds -->
+    <g stroke="#4a6a2a" stroke-width="1.5" fill="none">
+      <line x1="50" y1="140" x2="50" y2="108"/><ellipse cx="50" cy="106" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="75" y1="138" x2="75" y2="106"/><ellipse cx="75" cy="104" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="100" y1="142" x2="100" y2="110"/><ellipse cx="100" cy="108" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="125" y1="140" x2="125" y2="108"/><ellipse cx="125" cy="106" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="590" y1="138" x2="590" y2="106"/><ellipse cx="590" cy="104" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="615" y1="140" x2="615" y2="108"/><ellipse cx="615" cy="106" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="640" y1="138" x2="640" y2="106"/><ellipse cx="640" cy="104" rx="4" ry="7" fill="#5a7a2a"/>
+      <line x1="665" y1="142" x2="665" y2="110"/><ellipse cx="665" cy="108" rx="4" ry="7" fill="#5a7a2a"/>
+    </g>
+    <!-- polar bears on shore -->
+    <g fill="#f8f8f8" opacity="0.9">
+      <ellipse cx="280" cy="155" rx="20" ry="11"/>
+      <circle cx="296" cy="148" r="9"/>
+      <ellipse cx="304" cy="145" rx="5" ry="3"/>
+      <!-- paws -->
+      <ellipse cx="268" cy="163" rx="5" ry="3"/>
+      <ellipse cx="278" cy="164" rx="5" ry="3"/>
+      <ellipse cx="292" cy="164" rx="5" ry="3"/>
+      <ellipse cx="302" cy="162" rx="5" ry="3"/>
+    </g>
+    <!-- small polar bear cub -->
+    <g fill="#f8f8f8" opacity="0.85">
+      <ellipse cx="245" cy="158" rx="12" ry="8"/>
+      <circle cx="255" cy="153" r="6"/>
+    </g>
+    <!-- small wetland pool -->
+    <ellipse cx="180" cy="145" rx="35" ry="10" fill="#3a8aaa" opacity="0.5"/>
+    <ellipse cx="530" cy="148" rx="28" ry="8" fill="#3a8aaa" opacity="0.45"/>
+    <!-- sun + clouds -->
+    <circle cx="100" cy="28" r="24" fill="#ffe082" opacity="0.8"/>
+    <ellipse cx="330" cy="18" rx="80" ry="20" fill="#fff" opacity="0.7"/>
+    <ellipse cx="580" cy="28" rx="60" ry="16" fill="#fff" opacity="0.6"/>
+  </svg>`
+};
+
+// ─────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────
+const regions = [
+  {
+    id:"canadian-shield", name:"Canadian Shield", icon:"🪨",
+    color:"#2563a8", badge:"badge-blue",
+    facts:[["Size","Covers 50% of Canada's land — the biggest region"],["Shape","Shaped like a horseshoe"],["Landscape","Large bedrock covered by thin soil; thousands of small lakes, bogs, and rolling hills"],["Age","Contains some of the oldest rock on Earth"],["Major cities","Sudbury, Ottawa, Montreal, Quebec City, Iqaluit, Thunder Bay, Winnipeg"]],
+    formation:"About 110,000 years ago, a giant glacier called the Laurentide Ice Sheet slid over the rock, carving out huge dips in the earth. When the ice melted, those dips filled with water — creating the thousands of lakes and swamps we see today. The rocks of the Shield are some of the oldest on the entire planet.",
+    indigenous:"The Innu lived in what is now Québec and Labrador. The Cree, Anishinaabeg, and Métis occupied large areas across Québec, Ontario, Manitoba, Saskatchewan, and Alberta. These groups adapted to the rocky, forested landscape and the many lakes and rivers.",
+    questions:[
+      {type:"chips",q:"What is the main surface of the Canadian Shield?",hint:"Look at the 'Landscape' row in the fact box above.",options:["Sandstone","Bedrock","Limestone","Clay"],answer:"Bedrock",fb:"Correct! Large areas of exposed and soil-covered bedrock are what give the Shield its rocky character."},
+      {type:"chips",q:"What is the main economic activity in the Canadian Shield?",hint:"Think about what resources are found underground and in the forests here.",options:["Wheat farming","Ocean fishing","Mining and forestry","Tourism"],answer:"Mining and forestry",fb:"Yes! The Shield is rich in minerals like copper, nickel, gold, and diamonds. Forestry is also very important."},
+      {type:"chips",q:"Which glacier shaped the Canadian Shield thousands of years ago?",hint:"Check the 'How was it formed?' section.",options:["Rocky Mountain Glacier","Laurentide Ice Sheet","Arctic Ice Cap","Cordillera Glacier"],answer:"Laurentide Ice Sheet",fb:"Correct! The Laurentide Ice Sheet carved out the dips that became the Shield's thousands of lakes."},
+      {type:"chips",q:"Which Indigenous group lived in the Canadian Shield in Québec and Labrador?",hint:"Check the 'Who lived here?' section above.",options:["Haida","Blackfoot","Innu","Mi'kmaq"],answer:"Innu",fb:"That's right! The Innu made their home on the Shield in what is now Québec and Labrador."},
+      {type:"text",q:"Would you rather visit the Canadian Shield for a vacation, or live there year-round? Give one reason.",hint:"Think about the landscape, weather, and activities. There is no wrong answer — just explain your thinking."}
+    ]
+  },
+  {
+    id:"western-cordillera", name:"Western Cordillera", icon:"🏔️",
+    color:"#059669", badge:"badge-green",
+    facts:[["Location","Narrow band along Canada's west coast"],["Landscape","Mountain belts separated by plateaus and valleys; peaks up to 3,000 m"],["Glaciers","Some active glaciers — snow stays on peaks all summer"],["Volcanic?","Yes — part of the Pacific Ring of Fire"],["Major cities","Vancouver, Victoria"]],
+    formation:"The Western Cordillera is part of the Ring of Fire — a zone of volcanic and earthquake activity that surrounds the Pacific Ocean. At least 49 volcanic eruptions have occurred in the Canadian section. The Canadian part is known as the Rocky Mountains and is the youngest of Canada's three major mountain ranges.",
+    indigenous:"First Peoples of the West Coast are numerous and distinct, including the Haida, Tlingit, Haisla, and Salish. Many groups share traditions such as recognizing salmon as a spiritual symbol and a central part of their diet. The Haida used totem poles carved with unique symbols to represent the identities of their clan.",
+    questions:[
+      {type:"chips",q:"How tall can the peaks of the Western Cordillera reach?",hint:"Check the 'Landscape' row in the fact box.",options:["1,000 m","2,000 m","3,000 m","5,000 m"],answer:"3,000 m",fb:"Correct! Peaks in the Western Cordillera reach up to 3,000 metres above sea level."},
+      {type:"chips",q:"What geological zone is the Western Cordillera part of?",hint:"Check the 'How was it formed?' section above.",options:["Atlantic Ridge","Ring of Fire","Great Rift Valley","Appalachian Belt"],answer:"Ring of Fire",fb:"Yes! The Ring of Fire is the zone of volcanic and earthquake activity surrounding the Pacific Ocean — Canada's west coast is part of it."},
+      {type:"chips",q:"Which Indigenous group used totem poles to show their clan identities?",hint:"Check the 'Who lived here?' section.",options:["Innu","Haudenosaunee","Haida","Blackfoot"],answer:"Haida",fb:"Correct! The Haida carved unique symbols on totem poles to represent the identities of members of their clan."},
+      {type:"chips",q:"Which of these is a leisure activity you would most likely do in the Western Cordillera?",hint:"Think about what you can do in a mountain region.",options:["Deep-sea fishing","Skiing and mountain biking","Wheat harvesting","Kayaking in wetlands"],answer:"Skiing and mountain biking",fb:"Great answer! The mountains of the Cordillera are famous for skiing, hiking, rock climbing, and mountain biking."},
+      {type:"text",q:"The Canadian government banned the Potlatch ceremony in 1885. In your own words, why do you think this was harmful to Indigenous communities?",hint:"Think about what the Potlatch ceremony meant to the Nootka people. What would be lost if it was taken away?"}
+    ]
+  },
+  {
+    id:"interior-plains", name:"Interior Plains", icon:"🌾",
+    color:"#d97706", badge:"badge-amber",
+    facts:[["Size","18% of Canada's land surface"],["Landscape","Mostly flat with rolling hills; extends north to the Arctic Ocean"],["Soil","Rich soil from eroded sediment — excellent for farming"],["Nickname","'The breadbasket of Canada'"],["Major cities","Calgary, Saskatoon"]],
+    formation:"The rich soil of the Interior Plains built up over millions of years as sediment eroded off the Canadian Shield and the Rocky Mountains, settling in layers across the flat land. This makes it some of the best farmland in the world. The Badlands region in Alberta formed when rivers cut through layers of ancient sediment — dinosaur fossils have been found here!",
+    indigenous:"The Plains Cree, Blackfoot, Assiniboine, and Métis peoples have lived here for thousands of years. The Plains Cree followed bison herds across the grasslands — bison provided food, clothing, shelter, and tools. The bison herds nearly went extinct when colonizers introduced horses and rifles and encouraged their mass slaughter.",
+    questions:[
+      {type:"chips",q:"Why is the Interior Plains called 'the breadbasket of Canada'?",hint:"Think about what grows there.",options:["It has the most bakeries","Wheat and cereal crops grow there","It was the first farming region","It exports bread to other countries"],answer:"Wheat and cereal crops grow there",fb:"Exactly! The Interior Plains produces most of Canada's wheat, canola, and other cereal crops."},
+      {type:"chips",q:"Where did the rich farming soil in the Interior Plains come from?",hint:"Check the 'How was it formed?' section above.",options:["Volcanic ash","Sediment eroded from the Canadian Shield and Rocky Mountains","Deposits from ancient oceans","Glacier melt from the Arctic"],answer:"Sediment eroded from the Canadian Shield and Rocky Mountains",fb:"Correct! Over millions of years, sediment settled across the plains, creating incredibly fertile soil."},
+      {type:"chips",q:"Which animal was central to the Plains Cree way of life?",hint:"Check the 'Who lived here?' section.",options:["Caribou","Salmon","Bison","Moose"],answer:"Bison",fb:"Yes! Bison provided the Plains Cree with food, clothing, shelter, and tools. Nothing was wasted."},
+      {type:"chips",q:"What are the two main economic activities in the Interior Plains?",hint:"Think about the landscape — flat land, rich soil, and fossil fuels underground.",options:["Fishing and shipbuilding","Tourism and skiing","Agriculture and mining (oil, gas, coal)","Hydroelectricity and forestry"],answer:"Agriculture and mining (oil, gas, coal)",fb:"That's right! The fertile land supports farming, while underground resources like oil, natural gas, and coal make mining another major industry."},
+      {type:"text",q:"The Interior Plains is the breadbasket of Canada. What do you think would happen to Canada's food supply if there was a long drought (no rain) in this region?",hint:"Think about what grows here and how much of Canada depends on it."}
+    ]
+  },
+  {
+    id:"appalachian", name:"Appalachian Region", icon:"🌊",
+    color:"#c0392b", badge:"badge-red",
+    facts:[["Location","East coast of Canada"],["Landscape","Rolling, rounded mountains worn down by erosion; peninsulas, islands, tidal inlets, and dunes"],["Age","Oldest of Canada's three major mountain ranges"],["Highest peak","Chic-Chocs at 1,230 m above sea level"],["Major cities","St. John's, Fredericton, Moncton, Charlottetown"]],
+    formation:"The Appalachian mountains are the oldest major mountain range in Canada. Over millions of years, weathering and erosion have worn down what were once much taller peaks into the lower, rolling mountains we see today. The region was once covered by ocean — the tidal inlets, dunes, and coastal landforms are evidence of this ancient past.",
+    indigenous:"Algonquian-speaking groups lived here, including the Mi'kmaq, Maliseet, Passamaquoddy, Beothuk, and Innu. The Mi'kmaq were expert navigators who built different styles of birchbark canoes for oceans, lakes, and rivers. The Beothuk people of Newfoundland used red ochre dye on their bodies and belongings — European settlers called them 'Red Indians' because of this practice.",
+    questions:[
+      {type:"chips",q:"Why are the Appalachian Mountains lower and more rounded than the Rockies?",hint:"Think about their age and what happens to mountains over time.",options:["They were never very tall","Weathering and erosion have worn the peaks down over millions of years","They were shaped by a different glacier","They are made of softer rock"],answer:"Weathering and erosion have worn the peaks down over millions of years",fb:"Exactly right! The Appalachians are much older, so wind, water, and ice have had millions of years to wear away the peaks."},
+      {type:"chips",q:"What is the tallest peak in the Appalachian region?",hint:"Check the facts box above.",options:["Mount Logan","Mount Garibaldi","Chic-Chocs","Gros Morne"],answer:"Chic-Chocs",fb:"Correct! The Chic-Chocs peak reaches 1,230 m — much lower than the Rocky Mountains because erosion has worn it down."},
+      {type:"chips",q:"What were the Mi'kmaq known for?",hint:"Check the 'Who lived here?' section.",options:["Building totem poles","Following bison herds","Navigating waterways with birchbark canoes","Living in igloos"],answer:"Navigating waterways with birchbark canoes",fb:"Yes! The Mi'kmaq were expert navigators who built different canoes suited for oceans, lakes, and rivers."},
+      {type:"chips",q:"Which economic activity is unique to the Appalachian region because of its coastal location?",hint:"Think about where this region is located — along the east coast, next to the ocean.",options:["Wheat farming","Deep-sea fishing and whale watching","Gold mining","Raising cattle"],answer:"Deep-sea fishing and whale watching",fb:"Correct! The coastal location makes ocean-based activities like deep-sea fishing and whale watching major industries here."},
+      {type:"text",q:"The Beothuk people painted their bodies and belongings red using ochre. European settlers gave them a nickname because of this. Why might it be important to use the correct name — Beothuk — instead of that nickname?",hint:"Think about respect, identity, and what names mean to a people."}
+    ]
+  },
+  {
+    id:"great-lakes", name:"Great Lakes & St. Lawrence Lowlands", icon:"🏙️",
+    color:"#6d28d9", badge:"badge-purple",
+    facts:[["Size","Smallest land region in Canada — but the most populated!"],["Population","Half of all Canadians live here"],["Landscape","Flat plains with some rolling hills; 5 Great Lakes shaped by glaciers"],["Farming","60% of the land is used for agriculture"],["Major cities","Toronto, London"]],
+    formation:"During the last Ice Age, the Laurentide Ice Sheet scraped along the earth's crust, creating massive gouges that became the five Great Lakes (Superior, Huron, Michigan, Erie, Ontario). The glacier also deposited rich soil across the region. Today the St. Lawrence River connects the Great Lakes to the Atlantic Ocean, making it a major global shipping route.",
+    indigenous:"The Anishinaabe (Ojibwe), Haudenosaunee (Iroquois), and Wendat (Huron) peoples have lived here for thousands of years. The Haudenosaunee grew crops using the 'Three Sisters' method: corn, beans, and squash planted together — the corn supports the beans, the beans add nutrients, and the squash shades the ground to prevent weeds.",
+    questions:[
+      {type:"chips",q:"How did the Great Lakes form?",hint:"Think about what happened during the last Ice Age.",options:["From volcanic eruptions","A giant meteorite crashed here","The Laurentide Ice Sheet scraped out huge gouges that filled with water","Rivers eroded the land over thousands of years"],answer:"The Laurentide Ice Sheet scraped out huge gouges that filled with water",fb:"Correct! The Great Lakes were carved out by the Laurentide Ice Sheet during the last Ice Age."},
+      {type:"chips",q:"What fraction of all Canadians live in the Great Lakes and St. Lawrence Lowlands?",hint:"Check the population row in the fact box.",options:["One quarter","One third","One half","Two thirds"],answer:"One half",fb:"Yes — half of all Canadians live in this tiny region, making it by far the most densely populated part of Canada."},
+      {type:"chips",q:"What are the 'Three Sisters' crops grown by the Haudenosaunee?",hint:"Check the 'Who lived here?' section above.",options:["Wheat, barley, rye","Corn, beans, squash","Potatoes, carrots, turnips","Rice, soy, oats"],answer:"Corn, beans, squash",fb:"Correct! The Three Sisters farming method was brilliant — each plant helped the others grow."},
+      {type:"chips",q:"What are the two main economic activities in the Great Lakes region?",hint:"Think about the flat land, rich soil, and large cities full of workers.",options:["Mining and forestry","Agriculture and urban industry","Fishing and hunting","Hydroelectricity"],answer:"Agriculture and urban industry",fb:"Right! 60% of the land is farmland, and the region also has Canada's largest cities and industries."},
+      {type:"text",q:"Why do you think so many Canadians live in the Great Lakes and St. Lawrence Lowlands compared to other regions like the Arctic or Canadian Shield?",hint:"Think about farming, jobs, climate, and transportation routes."}
+    ]
+  },
+  {
+    id:"arctic-lands", name:"Arctic Lands", icon:"🧊",
+    color:"#0891b2", badge:"badge-teal",
+    facts:[["Size","25% of Canada's landmass"],["Landscape","Glaciers, tundra, Arctic coastal plains, lowlands"],["Key feature","Permafrost — the ground is permanently frozen"],["Daylight","3–4 months of darkness in winter; 3–4 months of daylight in summer"],["Major city","Yellowknife"]],
+    formation:"The Arctic is defined by its extreme cold. Most of the ground is permafrost — permanently frozen soil that never fully thaws, making it impossible for trees to grow. Over 18% of Canada's freshwater is frozen in the Arctic. Climate change is now causing this permafrost to melt, dramatically changing the landscape and the lives of people and animals who live there.",
+    indigenous:"The Inuit and Inuvialuit peoples have lived in the Arctic for thousands of years. They adapted to extreme conditions by using furs and skins of animals like caribou and sealskin for clothing. Children played games that also built important survival skills. Climate change is now threatening traditional ways of life as the ice melts and animal migration patterns shift.",
+    questions:[
+      {type:"chips",q:"What is permafrost?",hint:"Check the 'Key feature' row in the fact box.",options:["A type of Arctic animal","Ground that stays frozen all year","A kind of rock formation","Ice that floats on the ocean"],answer:"Ground that stays frozen all year",fb:"Correct! Permafrost is ground that remains permanently frozen. It covers most of the Arctic Lands region."},
+      {type:"chips",q:"Why are there almost no trees in the Arctic?",hint:"Think about what trees need to grow and what the Arctic is like.",options:["Not enough sunlight","The soil is too sandy","Permafrost stops roots from growing deep","Too much wind"],answer:"Permafrost stops roots from growing deep",fb:"Right! Tree roots cannot penetrate the permanently frozen ground. Only low-growing tundra plants like mosses can survive here."},
+      {type:"chips",q:"What percentage of Canada's freshwater is found in the Arctic?",hint:"Check the fact box for a clue.",options:["5%","10%","18%","30%"],answer:"18%",fb:"Correct! Over 18% of Canada's freshwater is stored in the Arctic — mostly as ice and permafrost."},
+      {type:"chips",q:"Which Indigenous peoples are primarily associated with the Arctic Lands?",hint:"Check the 'Who lived here?' section.",options:["Cree and Métis","Haida and Tlingit","Inuit and Inuvialuit","Mi'kmaq and Beothuk"],answer:"Inuit and Inuvialuit",fb:"Yes! The Inuit and Inuvialuit have adapted to the Arctic's extreme conditions for thousands of years."},
+      {type:"text",q:"Climate change is causing Arctic permafrost to melt. Name one way this could affect the lives of people or animals in the region.",hint:"Think about what permafrost makes possible — buildings, animal habitat, ice for travel, and traditional ways of life."}
+    ]
+  },
+  {
+    id:"hudson-bay", name:"Hudson Bay Lowlands", icon:"🦭",
+    color:"#4a7a3a", badge:"badge-green",
+    facts:[["Size","Only 3% of Canada's landmass — very small"],["Landscape","Flat; 60% is underwater (Hudson Bay and James Bay); poorly draining soil"],["Ground cover","Most of the land is wetland and peatland (bog)"],["Wildlife","Breeding ground for polar bears and migratory birds"],["Key place","Churchill, Manitoba — famous for polar bear sightings"]],
+    formation:"The Hudson Bay Lowlands formed as glaciers retreated after the last Ice Age, leaving behind flat land with very poor drainage. The water couldn't run away, creating the massive wetlands and peatlands that define the region today. The land is so flat and waterlogged that very few people have ever settled here — it is one of the wildest and least disturbed places in Canada.",
+    indigenous:"The Cree and Oji-Cree peoples have traditionally lived in and around the Hudson Bay Lowlands. The James Bay Cree have inhabited the southern shores for thousands of years, living by hunting, fishing, and trapping. In the 1970s, the James Bay Cree successfully fought to stop parts of a major hydroelectric project that threatened their land and waterways.",
+    questions:[
+      {type:"chips",q:"Why is so much of the Hudson Bay Lowlands covered in wetlands?",hint:"Think about the flat terrain and poorly draining soil.",options:["It rains constantly","Flat land and poor drainage trap water on the surface","It is below sea level","Underground springs keep the land wet"],answer:"Flat land and poor drainage trap water on the surface",fb:"Correct! The combination of flat terrain and poorly draining soil means water can't run off, creating the massive wetland system."},
+      {type:"chips",q:"What percentage of the Hudson Bay Lowlands is underwater (Hudson Bay and James Bay)?",hint:"Check the landscape row in the fact box.",options:["20%","40%","60%","80%"],answer:"60%",fb:"Right — 60% of this region's surface area is actually the water of Hudson Bay and James Bay!"},
+      {type:"chips",q:"What animal is the Hudson Bay Lowlands especially famous for?",hint:"Check the wildlife and key place rows in the fact box.",options:["Bison","Caribou","Polar bears","Moose"],answer:"Polar bears",fb:"Yes! Churchill, Manitoba is one of the most famous places in the world to see polar bears. They gather there each autumn as the bay begins to freeze."},
+      {type:"chips",q:"Why is there very little economic activity in the Hudson Bay Lowlands?",hint:"Think about what the boggy wetland terrain means for building roads and settlements.",options:["The government protects all of it","Very few people settled there because of the difficult boggy terrain","It is too cold","There are no natural resources at all"],answer:"Very few people settled there because of the difficult boggy terrain",fb:"Correct! The waterlogged terrain makes it very difficult to build settlements or roads, so the region has almost no development."},
+      {type:"text",q:"The Hudson Bay Lowlands is one of the least developed regions in Canada. Do you think it should stay that way? Give one reason for your opinion.",hint:"Think about the polar bears and wildlife, the wetlands, and what development might do to this ecosystem."}
+    ]
+  }
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const state = { completed: {}, answers: {}, current: null, step: 0 };
+
+// ─────────────────────────────────────────────
+// SCREENS
+// ─────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goHome() { renderGrid(); showScreen('home-screen'); }
+
+// ─────────────────────────────────────────────
+// PROGRESS
+// ─────────────────────────────────────────────
+function updateProgress() {
+  const n = Object.keys(state.completed).length;
+  document.getElementById('prog-fill').style.width = Math.round(n / 7 * 100) + '%';
+  document.getElementById('prog-count').textContent = n + ' of 7 regions complete';
+}
+
+// ─────────────────────────────────────────────
+// HOME GRID
+// ─────────────────────────────────────────────
+function renderGrid() {
+  const grid = document.getElementById('region-grid');
+  grid.innerHTML = regions.map(r => {
+    const done = state.completed[r.id];
+    const check = done ? `<span class="check-circle"><svg viewBox="0 0 10 8" fill="none" stroke="#fff" stroke-width="2"><polyline points="1,4 4,7 9,1"/></svg></span>` : '';
+    return `<button class="region-card ${done ? 'done' : ''}" onclick="openRegion('${r.id}')" aria-label="Open ${r.name}">
+      <div class="card-img">${SVGS[r.id]}</div>
+      <div class="card-body">
+        <div class="card-name">${r.icon} ${r.name}</div>
+        <div class="card-status">${check}${done ? 'Complete ✓' : 'Tap to start →'}</div>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────
+// REGION DETAIL
+// ─────────────────────────────────────────────
+function openRegion(id) {
+  state.current = id;
+  state.step = 0;
+  if (!state.answers[id]) state.answers[id] = {};
+  renderStep();
+  showScreen('region-screen');
+}
+
+function renderStep() {
+  const r = regions.find(x => x.id === state.current);
+  const step = state.step;
+  const totalSteps = 3 + r.questions.length;
+  const steps = ['Facts', 'Formation', 'Indigenous', ...r.questions.map((_, i) => 'Q' + (i + 1))];
+
+  // Stepper
+  const stepperHTML = `<div class="stepper">
+    ${steps.map((lbl, i) => `
+      ${i > 0 ? `<div class="step-line ${i <= step ? 'done-line' : ''}"></div>` : ''}
+      <div class="step-dot ${i < step ? 'done-step' : i === step ? 'active' : ''}"
+        onclick="jumpStep(${i})" title="${lbl}" aria-label="Step ${i + 1}: ${lbl}">
+        ${i < step ? '✓' : i + 1}
+      </div>`).join('')}
+  </div>`;
+
+  // Nav buttons
+  const isLast = step === totalSteps - 1;
+  const navHTML = `<div class="nav-row">
+    ${step > 0
+      ? `<button class="btn btn-outline" onclick="jumpStep(${step - 1})">← Back</button>`
+      : `<button class="btn btn-outline" onclick="goHome()">← All regions</button>`}
+    ${isLast
+      ? `<button class="btn btn-success" onclick="finishRegion()">✓ Mark complete</button>`
+      : `<button class="btn btn-primary" onclick="jumpStep(${step + 1})">Next →</button>`}
+  </div>`;
+
+  // Hero image
+  const heroHTML = `<div class="region-hero">${SVGS[r.id]}<div class="region-hero-label">${r.name}</div></div>`;
+
+  // Body content
+  let body = '';
+  if (step === 0) {
+    body = `<div class="step-body">
+      <span class="section-badge badge-green">⚡ Key facts</span>
+      <p style="font-size:0.88rem;color:#64748b;margin-bottom:0.75rem;line-height:1.5">Read through these facts carefully — you'll use them to answer the questions coming up.</p>
+      <table class="fact-table">${r.facts.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table>
+    </div>`;
+  } else if (step === 1) {
+    body = `<div class="step-body">
+      <span class="section-badge badge-blue">🌍 How was it formed?</span>
+      <div class="reading-block" style="margin-top:0.75rem"><p>${r.formation}</p></div>
+    </div>`;
+  } else if (step === 2) {
+    body = `<div class="step-body">
+      <span class="section-badge badge-amber">🏛️ Who lived here?</span>
+      <div class="reading-block" style="margin-top:0.75rem"><p>${r.indigenous}</p></div>
+    </div>`;
+  } else {
+    const qi = step - 3;
+    body = renderQuestion(r, qi);
+  }
+
+  document.getElementById('region-content').innerHTML =
+    `<div class="detail-card">${heroHTML}${stepperHTML}${body}${navHTML}</div>`;
+
+  // Re-attach text area listener
+  const r2 = regions.find(x => x.id === state.current);
+  const step2 = state.step;
+  if (step2 >= 3) {
+    const qi = step2 - 3;
+    if (r2.questions[qi].type === 'text') {
+      const ta = document.getElementById('ta-' + qi);
+      if (ta) {
+        ta.value = state.answers[state.current][qi] || '';
+        ta.addEventListener('input', () => { state.answers[state.current][qi] = ta.value; });
+      }
+    }
+  }
+}
+
+function jumpStep(n) { state.step = n; renderStep(); }
+
+function renderQuestion(r, qi) {
+  const q = r.questions[qi];
+  const saved = state.answers[r.id][qi];
+  const qNumHTML = `<span class="q-num">${qi + 1}</span>`;
+
+  let inputHTML = '';
+  if (q.type === 'chips') {
+    const locked = saved === q.answer;
+    inputHTML = `<div class="chip-group">
+      ${q.options.map(o => {
+        let cls = 'chip';
+        if (saved) {
+          if (o === q.answer) cls += ' selected locked';
+          else if (o === saved && saved !== q.answer) cls += ' wrong locked';
+          else cls += ' locked';
+        }
+        return `<button class="${cls}" onclick="selectChip(this,'${o.replace(/'/g, "\\'")}',${qi})">${o}</button>`;
+      }).join('')}
+    </div>
+    <div class="feedback ${saved ? (saved === q.answer ? 'good' : 'bad') + ' show' : ''}" id="fb-${qi}">
+      <span class="feedback-icon">${saved === q.answer ? '✅' : '❌'}</span>
+      <span>${saved === q.answer ? q.fb : 'Not quite — try again!'}</span>
+    </div>`;
+  } else {
+    inputHTML = `<textarea class="text-answer" id="ta-${qi}" rows="4" placeholder="Type your answer here… 1–2 sentences is fine!">${saved || ''}</textarea>`;
+  }
+
+  return `<div class="step-body">
+    <p class="q-label">${qNumHTML} ${q.q}</p>
+    ${q.hint ? `<div class="hint-box"><span class="hint-icon">💡</span><span>${q.hint}</span></div>` : ''}
+    ${inputHTML}
+  </div>`;
+}
+
+function selectChip(el, val, qi) {
+  const r = regions.find(x => x.id === state.current);
+  const q = r.questions[qi];
+  if (state.answers[state.current][qi] === q.answer) return;
+  state.answers[state.current][qi] = val;
+  const group = el.closest('.chip-group');
+  group.querySelectorAll('.chip').forEach(c => {
+    c.classList.remove('selected', 'wrong', 'locked');
+    const cv = c.textContent.trim();
+    if (cv === q.answer) c.classList.add('selected', 'locked');
+    else if (cv === val && val !== q.answer) c.classList.add('wrong', 'locked');
+    else c.classList.add('locked');
+  });
+  const fb = document.getElementById('fb-' + qi);
+  if (val === q.answer) {
+    fb.className = 'feedback good show';
+    fb.innerHTML = `<span class="feedback-icon">✅</span><span>${q.fb}</span>`;
+  } else {
+    fb.className = 'feedback bad show';
+    fb.innerHTML = `<span class="feedback-icon">❌</span><span>Not quite — try again!</span>`;
+    // unlock after wrong so they can retry
+    group.querySelectorAll('.chip').forEach(c => {
+      if (!c.classList.contains('selected')) c.classList.remove('locked');
+    });
+    state.answers[state.current][qi] = null;
+  }
+}
+
+function finishRegion() {
+  const r = regions.find(x => x.id === state.current);
+  const ans = state.answers[r.id];
+  const allDone = r.questions.every((q, i) => {
+    if (q.type === 'chips') return ans[i] === q.answer;
+    return ans[i] && ans[i].trim().length > 0;
+  });
+  if (!allDone) {
+    alert('Almost there! Please check that:\n• All click questions show a green ✅\n• The written question has a response\n\nThen try again.');
+    return;
+  }
+  state.completed[r.id] = true;
+  updateProgress();
+  renderGrid();
+  if (Object.keys(state.completed).length === 7) {
+    showDone();
+  } else {
+    goHome();
+  }
+}
+
+function showDone() {
+  const n = regions.reduce((a, r) => a + r.questions.filter(q => q.type === 'chips').length, 0);
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-card"><div class="num">7</div><div class="lbl">Regions completed</div></div>
+    <div class="stat-card"><div class="num">${n}</div><div class="lbl">Questions answered</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="lbl">Written reflections</div></div>`;
+  // pre-fill date
+  const d = new Date();
+  const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('student-date').value = d.toLocaleDateString('en-CA', opts);
+  showScreen('done-screen');
+}
+
+function generateSummary() {
+  const name = document.getElementById('student-name').value.trim();
+  const date = document.getElementById('student-date').value.trim();
+  if (!name) { alert('Please enter your name before generating the summary.'); document.getElementById('student-name').focus(); return; }
+
+  // Build the summary HTML
+  let regionsHTML = '';
+  regions.forEach(r => {
+    const ans = state.answers[r.id] || {};
+    let questionsHTML = '';
+    r.questions.forEach((q, i) => {
+      const a = ans[i];
+      if (q.type === 'chips') {
+        const correct = a === q.answer;
+        questionsHTML += `<div class="ps-q">
+          <div class="ps-q-label">Multiple choice question ${i + 1}</div>
+          <div class="ps-q-text">${q.q}</div>
+          <div class="ps-answer correct">✅ ${a || q.answer}</div>
+        </div>`;
+      } else {
+        questionsHTML += `<div class="ps-q">
+          <div class="ps-q-label">Written reflection</div>
+          <div class="ps-q-text">${q.q}</div>
+          <div class="ps-answer written">${(a || '').trim() || '(no response)'}</div>
+        </div>`;
+      }
+    });
+    regionsHTML += `<div class="ps-region">
+      <div class="ps-region-header">${r.icon} ${r.name}</div>
+      <div class="ps-region-body">${questionsHTML}</div>
+    </div>`;
+  });
+
+  const summaryHTML = `<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>Fact File Summary — ${name}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'Nunito Sans', sans-serif; background: #fff; color: #1e293b; font-size: 13px; line-height: 1.6; padding: 2rem 2.5rem; max-width: 750px; margin: 0 auto; }
+      h1 { font-family: 'Nunito', sans-serif; font-size: 1.25rem; color: #1a4731; }
+      .ps-header { border-bottom: 3px solid #2d8a5e; padding-bottom: 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: flex-end; }
+      .ps-meta { text-align: right; font-size: 0.82rem; color: #475569; }
+      .ps-meta strong { display: block; font-size: 0.95rem; color: #1e293b; }
+      .ps-region { page-break-inside: avoid; margin-bottom: 1.2rem; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; }
+      .ps-region-header { background: #1a4731; color: #fff; padding: 7px 12px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; }
+      .ps-region-body { padding: 10px 12px; }
+      .ps-q { margin-bottom: 0.7rem; padding-bottom: 0.7rem; border-bottom: 1px solid #f1f5f9; }
+      .ps-q:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .ps-q-label { font-weight: 700; font-size: 0.75rem; color: #475569; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+      .ps-q-text { font-size: 0.83rem; color: #374151; margin-bottom: 4px; }
+      .ps-answer { font-size: 0.86rem; padding: 5px 10px; border-radius: 5px; }
+      .ps-answer.correct { background: #e8f5ee; color: #14532d; border-left: 3px solid #2d8a5e; }
+      .ps-answer.written { background: #f8fafc; color: #1e293b; border-left: 3px solid #94a3b8; white-space: pre-wrap; }
+      .ps-footer { margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0; font-size: 0.72rem; color: #94a3b8; text-align: center; }
+      @media print { @page { margin: 1.5cm; } }
+    </style>
+  </head><body>
+    <div class="ps-header">
+      <div>
+        <div style="font-size:0.78rem;color:#64748b;margin-bottom:2px">Physiographic Regions of Canada</div>
+        <h1>🍁 Digital Fact File — Completed Summary</h1>
+      </div>
+      <div class="ps-meta">
+        <strong>${name}</strong>
+        ${date}
+      </div>
+    </div>
+    ${regionsHTML}
+    <div class="ps-footer">Physiographic Regions of Canada — Digital Fact File &nbsp;|&nbsp; All 7 regions completed &nbsp;|&nbsp; Generated ${date}</div>
+    <script>window.onload = function(){ window.print(); }<\/script>
+  </body></html>`;
+
+  const blob = new Blob([summaryHTML], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank');
+  if (!win) {
+    alert('Pop-up blocked! Please allow pop-ups for this page, then try again.');
+    URL.revokeObjectURL(url);
+  } else {
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderGrid();
+updateProgress();
+</script>
+
+
+</body></html>
