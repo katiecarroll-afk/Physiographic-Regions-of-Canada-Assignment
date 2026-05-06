@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_1.html -->
+<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_3.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -365,7 +365,7 @@
         <label class="field-label" for="login-name">Your full name</label>
         <input type="text" id="login-name" class="name-input" placeholder="First and last name" autocomplete="name">
       </div>
-      <button class="btn btn-primary" onclick="loginStudent()" style="width:100%;justify-content:center;margin-top:1rem;padding:12px;">
+      <button id="login-btn" class="btn btn-primary" onclick="loginStudent()" style="width:100%;justify-content:center;margin-top:1rem;padding:12px;">
         Start (or continue) my assignment →
       </button>
       <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;text-align:center;line-height:1.5">If you have already started, enter the same name you used before and your progress will load automatically.</p>
@@ -1167,18 +1167,26 @@ let db = null;
 let fbLoaded = false;
 
 function loadFirebase() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (fbLoaded) { resolve(); return; }
     const s1 = document.createElement('script');
     s1.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js';
+    s1.onerror = () => reject(new Error('Could not load Firebase. Make sure you are connected to the internet.'));
     s1.onload = () => {
       const s2 = document.createElement('script');
       s2.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js';
+      s2.onerror = () => reject(new Error('Could not load Firestore. Make sure you are connected to the internet.'));
       s2.onload = () => {
-        firebase.initializeApp(FB_CONFIG);
-        db = firebase.firestore();
-        fbLoaded = true;
-        resolve();
+        try {
+          if (!firebase.apps.length) {
+            firebase.initializeApp(FB_CONFIG);
+          }
+          db = firebase.firestore();
+          fbLoaded = true;
+          resolve();
+        } catch(e) {
+          reject(e);
+        }
       };
       document.head.appendChild(s2);
     };
@@ -1257,7 +1265,10 @@ async function loadFromFirebase(studentId) {
 async function loginStudent() {
   const nameInput = document.getElementById('login-name');
   const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
   const name = nameInput.value.trim();
+
+  errEl.style.display = 'none';
 
   if (!name || name.length < 2) {
     errEl.style.display = 'block';
@@ -1266,22 +1277,17 @@ async function loginStudent() {
     return;
   }
 
-  // Disable button while loading
-  const btn = nameInput.nextElementSibling.nextElementSibling;
   btn.disabled = true;
   btn.textContent = 'Loading…';
-  errEl.style.display = 'none';
 
   try {
     await loadFirebase();
-    // Use name as ID (lowercased, spaces replaced) — simple but effective for a classroom
     const studentId = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     state.studentId = studentId;
     state.studentName = name;
 
     const returning = await loadFromFirebase(studentId);
 
-    // Pre-fill name on done screen
     const nameField = document.getElementById('student-name');
     if (nameField) nameField.value = name;
 
@@ -1289,12 +1295,12 @@ async function loginStudent() {
     document.getElementById('save-status').style.display = 'flex';
 
     if (returning && Object.keys(state.completed).length > 0) {
-      // Show a welcome back message briefly
       showSaveStatus('saved', '✓ Welcome back — progress loaded!');
     }
   } catch(e) {
+    console.error('Login error:', e);
     errEl.style.display = 'block';
-    errEl.textContent = 'Could not connect. Check your internet and try again.';
+    errEl.textContent = 'Could not connect to save your work. Check your internet connection and try again. (Error: ' + e.message + ')';
     btn.disabled = false;
     btn.textContent = 'Start (or continue) my assignment →';
   }
