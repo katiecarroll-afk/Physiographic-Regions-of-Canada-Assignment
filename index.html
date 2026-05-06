@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_3.html -->
+<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_5.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Physiographic Regions of Canada — Digital Fact File</title>
 <link href="./index_files/css2" rel="stylesheet">
+<script src="./index_files/firebase-app-compat.js.download"></script>
+<script src="./index_files/firebase-firestore-compat.js.download"></script>
+<script>
+  // Initialise Firebase immediately so it is ready when loginStudent() is called
+  const FB_CONFIG = {
+    apiKey: "AIzaSyB9HgIMiE-Bjww-tugV_tha35FGbjIRaj0",
+    authDomain: "physiographic-regions-factfile.firebaseapp.com",
+    projectId: "physiographic-regions-factfile",
+    storageBucket: "physiographic-regions-factfile.firebasestorage.app",
+    messagingSenderId: "865648837916",
+    appId: "1:865648837916:web:594a348cbfa567e73426d9"
+  };
+  let db = null;
+  try {
+    firebase.initializeApp(FB_CONFIG);
+    db = firebase.firestore();
+  } catch(e) {
+    console.error('Firebase init error:', e);
+  }
+</script>
 <style>
   :root {
     --green: #2d8a5e;
@@ -1152,47 +1172,8 @@ const regions = [
 // STATE
 // ─────────────────────────────────────────────
 // FIREBASE SETUP
+// Firebase is initialised in <head> — db is already available here
 // ─────────────────────────────────────────────
-const FB_CONFIG = {
-  apiKey: "AIzaSyB9HgIMiE-Bjww-tugV_tha35FGbjIRaj0",
-  authDomain: "physiographic-regions-factfile.firebaseapp.com",
-  projectId: "physiographic-regions-factfile",
-  storageBucket: "physiographic-regions-factfile.firebasestorage.app",
-  messagingSenderId: "865648837916",
-  appId: "1:865648837916:web:594a348cbfa567e73426d9"
-};
-
-// Load Firebase from CDN
-let db = null;
-let fbLoaded = false;
-
-function loadFirebase() {
-  return new Promise((resolve, reject) => {
-    if (fbLoaded) { resolve(); return; }
-    const s1 = document.createElement('script');
-    s1.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js';
-    s1.onerror = () => reject(new Error('Could not load Firebase. Make sure you are connected to the internet.'));
-    s1.onload = () => {
-      const s2 = document.createElement('script');
-      s2.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js';
-      s2.onerror = () => reject(new Error('Could not load Firestore. Make sure you are connected to the internet.'));
-      s2.onload = () => {
-        try {
-          if (!firebase.apps.length) {
-            firebase.initializeApp(FB_CONFIG);
-          }
-          db = firebase.firestore();
-          fbLoaded = true;
-          resolve();
-        } catch(e) {
-          reject(e);
-        }
-      };
-      document.head.appendChild(s2);
-    };
-    document.head.appendChild(s1);
-  });
-}
 
 // ─────────────────────────────────────────────
 // STATE
@@ -1280,8 +1261,23 @@ async function loginStudent() {
   btn.disabled = true;
   btn.textContent = 'Loading…';
 
+  // If Firebase failed to load (no internet etc.), let student in anyway
+  // — work just won't save, but they can still complete the assignment
+  if (!db) {
+    errEl.style.display = 'block';
+    errEl.textContent = '⚠️ Could not connect to the save system — check your internet. Your work will not be saved between sessions, but you can still complete the assignment now.';
+    const studentId = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    state.studentId = studentId;
+    state.studentName = name;
+    const nameField = document.getElementById('student-name');
+    if (nameField) nameField.value = name;
+    btn.disabled = false;
+    btn.textContent = 'Start (or continue) my assignment →';
+    showScreen('home-screen');
+    return;
+  }
+
   try {
-    await loadFirebase();
     const studentId = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     state.studentId = studentId;
     state.studentName = name;
@@ -1300,7 +1296,7 @@ async function loginStudent() {
   } catch(e) {
     console.error('Login error:', e);
     errEl.style.display = 'block';
-    errEl.textContent = 'Could not connect to save your work. Check your internet connection and try again. (Error: ' + e.message + ')';
+    errEl.textContent = 'Something went wrong: ' + e.message;
     btn.disabled = false;
     btn.textContent = 'Start (or continue) my assignment →';
   }
@@ -1323,7 +1319,6 @@ if (window.location.search.includes('teacher=true')) {
 }
 
 async function openDashboard() {
-  await loadFirebase();
   const snapshot = await db.collection('students').orderBy('lastSaved', 'desc').get();
   const rows = [];
   snapshot.forEach(doc => {
