@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_5.html -->
+<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_7.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1192,7 +1192,7 @@ function showSaveStatus(type, msg) {
   el.className = type;
   txt.textContent = msg;
   if (type === 'saved') {
-    setTimeout(() => { el.style.display = 'none'; }, 3000);
+    setTimeout(() => { el.style.display = 'none'; }, 4000);
   }
 }
 
@@ -1202,6 +1202,36 @@ function scheduleSave() {
   saveTimer = setTimeout(saveToFirebase, 1200);
 }
 
+// Convert answers object (numeric keys) to Firestore-safe string keys
+function answersToFirestore(answers) {
+  const out = {};
+  for (const regionId in answers) {
+    const regionAnswers = answers[regionId];
+    const converted = {};
+    for (const key in regionAnswers) {
+      converted['q' + key] = regionAnswers[key] === null ? '__null__' : (regionAnswers[key] || '');
+    }
+    out[regionId] = converted;
+  }
+  return out;
+}
+
+// Convert back from Firestore string keys to numeric keys
+function answersFromFirestore(raw) {
+  const out = {};
+  for (const regionId in raw) {
+    const regionAnswers = raw[regionId];
+    const converted = {};
+    for (const key in regionAnswers) {
+      const numKey = parseInt(key.replace('q', ''));
+      const val = regionAnswers[key];
+      converted[numKey] = val === '__null__' ? null : val;
+    }
+    out[regionId] = converted;
+  }
+  return out;
+}
+
 async function saveToFirebase() {
   if (!db || !state.studentId) return;
   try {
@@ -1209,31 +1239,31 @@ async function saveToFirebase() {
       name: state.studentName,
       studentId: state.studentId,
       completed: state.completed,
-      answers: state.answers,
+      answers: answersToFirestore(state.answers),
       lastSaved: firebase.firestore.FieldValue.serverTimestamp(),
       regionsComplete: Object.keys(state.completed).length
     };
-    await db.collection('students').doc(state.studentId).set(payload, { merge: true });
+    await db.collection('students').doc(state.studentId).set(payload);
     showSaveStatus('saved', '✓ Progress saved');
   } catch(e) {
-    showSaveStatus('error', 'Save failed — check connection');
+    showSaveStatus('error', '⚠️ Save failed — check your connection');
     console.error('Firebase save error:', e);
   }
 }
 
 async function loadFromFirebase(studentId) {
-  if (!db) return;
+  if (!db) return false;
   try {
     const doc = await db.collection('students').doc(studentId).get();
     if (doc.exists) {
       const data = doc.data();
       state.completed = data.completed || {};
-      state.answers = data.answers || {};
+      state.answers = answersFromFirestore(data.answers || {});
       updateProgress();
       renderGrid();
-      return true; // returning student
+      return true;
     }
-    return false; // new student
+    return false;
   } catch(e) {
     console.error('Firebase load error:', e);
     return false;
@@ -1288,7 +1318,7 @@ async function loginStudent() {
     if (nameField) nameField.value = name;
 
     showScreen('home-screen');
-    document.getElementById('save-status').style.display = 'flex';
+    const ss = document.getElementById('save-status'); ss.style.display = 'flex'; ss.className = ''; document.getElementById('save-text').textContent = 'Connected ✓';
 
     if (returning && Object.keys(state.completed).length > 0) {
       showSaveStatus('saved', '✓ Welcome back — progress loaded!');
