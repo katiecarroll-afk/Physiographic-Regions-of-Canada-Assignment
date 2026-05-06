@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_7.html -->
+<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_8.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,8 +21,10 @@
   try {
     firebase.initializeApp(FB_CONFIG);
     db = firebase.firestore();
+    console.log('Firebase initialised successfully — db ready:', !!db);
   } catch(e) {
-    console.error('Firebase init error:', e);
+    console.error('Firebase init FAILED:', e.code, e.message);
+    db = null;
   }
 </script>
 <style>
@@ -1233,8 +1235,14 @@ function answersFromFirestore(raw) {
 }
 
 async function saveToFirebase() {
-  if (!db || !state.studentId) return;
+  console.log('saveToFirebase called — db:', !!db, '— studentId:', state.studentId);
+  if (!db || !state.studentId) {
+    console.warn('saveToFirebase: missing db or studentId, aborting');
+    showSaveStatus('error', '⚠️ Not connected — cannot save');
+    return;
+  }
   try {
+    console.log('Building payload…');
     const payload = {
       name: state.studentName,
       studentId: state.studentId,
@@ -1243,20 +1251,29 @@ async function saveToFirebase() {
       lastSaved: firebase.firestore.FieldValue.serverTimestamp(),
       regionsComplete: Object.keys(state.completed).length
     };
+    console.log('Payload ready, writing to Firestore doc:', state.studentId);
     await db.collection('students').doc(state.studentId).set(payload);
+    console.log('Firestore write SUCCESS');
     showSaveStatus('saved', '✓ Progress saved');
   } catch(e) {
-    showSaveStatus('error', '⚠️ Save failed — check your connection');
-    console.error('Firebase save error:', e);
+    console.error('Firestore write FAILED:', e.code, e.message);
+    showSaveStatus('error', '⚠️ Save failed: ' + e.message);
   }
 }
 
 async function loadFromFirebase(studentId) {
-  if (!db) return false;
+  console.log('loadFromFirebase called — studentId:', studentId, '— db:', !!db);
+  if (!db) {
+    console.warn('loadFromFirebase: db is null');
+    return false;
+  }
   try {
+    console.log('Reading Firestore doc…');
     const doc = await db.collection('students').doc(studentId).get();
+    console.log('Doc exists:', doc.exists);
     if (doc.exists) {
       const data = doc.data();
+      console.log('Loaded data:', JSON.stringify(data).substring(0, 200));
       state.completed = data.completed || {};
       state.answers = answersFromFirestore(data.answers || {});
       updateProgress();
@@ -1265,7 +1282,7 @@ async function loadFromFirebase(studentId) {
     }
     return false;
   } catch(e) {
-    console.error('Firebase load error:', e);
+    console.error('Firestore read FAILED:', e.code, e.message);
     return false;
   }
 }
