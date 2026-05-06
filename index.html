@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- saved from url=(0066)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions.html -->
+<!-- saved from url=(0068)file:///C:/Users/kmcar/Downloads/canada_physiographic_regions_1.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Physiographic Regions of Canada — Digital Fact File</title>
-<link href="./Physiographic Regions of Canada — Digital Fact File_files/css2" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   :root {
     --green: #2d8a5e;
@@ -248,6 +248,24 @@
   .stat-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
 
 
+
+  /* ── LOGIN ── */
+  .login-wrap { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+  .login-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; width: 100%; max-width: 420px; box-shadow: var(--shadow-md); }
+  .login-top { text-align: center; margin-bottom: 1.5rem; }
+  .login-error { background: var(--red-light); border: 1px solid #fca5a5; border-radius: var(--radius-sm); padding: 8px 12px; font-size: 0.85rem; color: var(--red); margin-bottom: 1rem; }
+  .field-label { font-size: 0.82rem; font-weight: 700; color: var(--muted); display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ── SAVE STATUS INDICATOR ── */
+  #save-status { position: fixed; bottom: 16px; right: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 99px; padding: 6px 14px; font-size: 0.78rem; font-weight: 600; color: var(--muted); box-shadow: var(--shadow); display: flex; align-items: center; gap: 6px; transition: all 0.3s; z-index: 200; }
+  #save-status.saving { border-color: var(--amber); color: var(--amber); }
+  #save-status.saved { border-color: var(--green); color: var(--green); }
+  #save-status.error { border-color: var(--red); color: var(--red); }
+  .save-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  /* ── TEACHER DASHBOARD ── */
+  #dashboard-btn { position: fixed; bottom: 16px; left: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 99px; padding: 6px 14px; font-size: 0.78rem; font-weight: 600; color: var(--muted); box-shadow: var(--shadow); cursor: pointer; z-index: 200; display: none; }
+
   /* ── SUBMIT CARD ── */
   .submit-card {
     background: var(--card);
@@ -329,10 +347,34 @@
   </div>
 </div>
 
+<div id="save-status" style="display:none"><span class="save-dot"></span><span id="save-text">Saving…</span></div>
+<button id="dashboard-btn" onclick="openDashboard()">📊 Teacher view</button>
 <main class="main">
 
+<!-- LOGIN -->
+<div class="screen active" id="login-screen">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-top">
+        <span style="font-size:2.5rem;display:block;margin-bottom:0.5rem">🍁</span>
+        <h2 style="margin-bottom:0.25rem">Physiographic Regions of Canada</h2>
+        <p style="font-size:0.9rem;color:var(--muted)">Digital Fact File &nbsp;·&nbsp; Enter your name to begin or continue</p>
+      </div>
+      <div id="login-error" class="login-error" style="display:none"></div>
+      <div>
+        <label class="field-label" for="login-name">Your full name</label>
+        <input type="text" id="login-name" class="name-input" placeholder="First and last name" autocomplete="name">
+      </div>
+      <button class="btn btn-primary" onclick="loginStudent()" style="width:100%;justify-content:center;margin-top:1rem;padding:12px;">
+        Start (or continue) my assignment →
+      </button>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;text-align:center;line-height:1.5">If you have already started, enter the same name you used before and your progress will load automatically.</p>
+    </div>
+  </div>
+</div>
+
 <!-- HOME -->
-<div class="screen active" id="home-screen">
+<div class="screen" id="home-screen">
   <div class="how-card">
     <h3>📋 How this works</h3>
     <div class="how-steps">
@@ -671,82 +713,7 @@
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 12L6 8l4-4"></path></svg>
     All regions
   </button>
-  <div id="region-content"><div class="detail-card"><div class="region-hero"><svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg">
-    <rect width="700" height="180" fill="#c8e6d4"></rect>
-    <ellipse cx="350" cy="250" rx="400" ry="160" fill="#7db87d" opacity="0.4"></ellipse>
-    <rect x="0" y="110" width="700" height="70" fill="#5a8a5a"></rect>
-    <rect x="0" y="130" width="700" height="50" fill="#4a7a4a"></rect>
-    <!-- water reflections -->
-    <ellipse cx="120" cy="118" rx="55" ry="12" fill="#7ecbdc" opacity="0.85"></ellipse>
-    <ellipse cx="380" cy="122" rx="70" ry="14" fill="#7ecbdc" opacity="0.8"></ellipse>
-    <ellipse cx="580" cy="115" rx="45" ry="10" fill="#7ecbdc" opacity="0.8"></ellipse>
-    <!-- bedrock slabs -->
-    <path d="M0 108 Q60 96 130 102 Q200 108 270 98 Q340 88 420 100 Q500 112 570 104 Q640 96 700 108 L700 130 L0 130Z" fill="#8b7355"></path>
-    <path d="M0 118 Q80 108 160 114 Q240 120 310 110 Q380 100 450 110 Q520 120 600 112 Q660 104 700 118 L700 135 L0 135Z" fill="#9e8b6e" opacity="0.6"></path>
-    <!-- trees -->
-    <g fill="#2d5a2d">
-      <polygon points="50,100 65,70 80,100"></polygon><rect x="62" y="99" width="6" height="12" fill="#5c3d2e"></rect>
-      <polygon points="100,98 118,62 136,98"></polygon><rect x="114" y="97" width="8" height="13" fill="#5c3d2e"></rect>
-      <polygon points="160,104 175,75 190,104"></polygon><rect x="171" y="103" width="6" height="11" fill="#5c3d2e"></rect>
-      <polygon points="490,100 507,68 524,100"></polygon><rect x="503" y="99" width="8" height="12" fill="#5c3d2e"></rect>
-      <polygon points="550,96 565,68 580,96"></polygon><rect x="561" y="95" width="6" height="11" fill="#5c3d2e"></rect>
-      <polygon points="620,102 635,72 650,102"></polygon><rect x="631" y="101" width="6" height="12" fill="#5c3d2e"></rect>
-    </g>
-    <!-- rolling hills silhouette -->
-    <path d="M0 130 Q50 100 120 110 Q180 118 250 105 Q320 92 390 108 Q460 122 540 108 Q610 94 700 115 L700 180 L0 180Z" fill="#3d6b3d"></path>
-    <!-- sky gradient elements -->
-    <circle cx="600" cy="30" r="28" fill="#ffe082" opacity="0.7"></circle>
-    <ellipse cx="200" cy="25" rx="70" ry="20" fill="#fff" opacity="0.5"></ellipse>
-    <ellipse cx="420" cy="18" rx="55" ry="16" fill="#fff" opacity="0.4"></ellipse>
-    <ellipse cx="100" cy="35" rx="45" ry="14" fill="#fff" opacity="0.35"></ellipse>
-  </svg><div class="region-hero-label">Canadian Shield</div></div><div class="stepper">
-    
-      
-      <div class="step-dot done-step" onclick="jumpStep(0)" title="Facts" aria-label="Step 1: Facts">
-        ✓
-      </div>
-      <div class="step-line done-line"></div>
-      <div class="step-dot done-step" onclick="jumpStep(1)" title="Formation" aria-label="Step 2: Formation">
-        ✓
-      </div>
-      <div class="step-line done-line"></div>
-      <div class="step-dot done-step" onclick="jumpStep(2)" title="Indigenous" aria-label="Step 3: Indigenous">
-        ✓
-      </div>
-      <div class="step-line done-line"></div>
-      <div class="step-dot done-step" onclick="jumpStep(3)" title="Q1" aria-label="Step 4: Q1">
-        ✓
-      </div>
-      <div class="step-line done-line"></div>
-      <div class="step-dot done-step" onclick="jumpStep(4)" title="Q2" aria-label="Step 5: Q2">
-        ✓
-      </div>
-      <div class="step-line done-line"></div>
-      <div class="step-dot active" onclick="jumpStep(5)" title="Q3" aria-label="Step 6: Q3">
-        6
-      </div>
-      <div class="step-line "></div>
-      <div class="step-dot " onclick="jumpStep(6)" title="Q4" aria-label="Step 7: Q4">
-        7
-      </div>
-      <div class="step-line "></div>
-      <div class="step-dot " onclick="jumpStep(7)" title="Q5" aria-label="Step 8: Q5">
-        8
-      </div>
-  </div><div class="step-body">
-    <p class="q-label"><span class="q-num">3</span> Which glacier shaped the Canadian Shield thousands of years ago?</p>
-    <div class="hint-box"><span class="hint-icon">💡</span><span>Check the 'How was it formed?' section.</span></div>
-    <div class="chip-group">
-      <button class="chip locked" onclick="selectChip(this,&#39;Rocky Mountain Glacier&#39;,2)">Rocky Mountain Glacier</button><button class="chip selected locked" onclick="selectChip(this,&#39;Laurentide Ice Sheet&#39;,2)">Laurentide Ice Sheet</button><button class="chip locked" onclick="selectChip(this,&#39;Arctic Ice Cap&#39;,2)">Arctic Ice Cap</button><button class="chip locked" onclick="selectChip(this,&#39;Cordillera Glacier&#39;,2)">Cordillera Glacier</button>
-    </div>
-    <div class="feedback good show" id="fb-2">
-      <span class="feedback-icon">✅</span>
-      <span>Correct! The Laurentide Ice Sheet carved out the dips that became the Shield's thousands of lakes.</span>
-    </div>
-  </div><div class="nav-row">
-    <button class="btn btn-outline" onclick="jumpStep(4)">← Back</button>
-    <button class="btn btn-primary" onclick="jumpStep(6)">Next →</button>
-  </div></div></div>
+  <div id="region-content"></div>
 </div>
 
 <!-- DONE -->
@@ -1184,7 +1151,204 @@ const regions = [
 // ─────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────
-const state = { completed: {}, answers: {}, current: null, step: 0 };
+// FIREBASE SETUP
+// ─────────────────────────────────────────────
+const FB_CONFIG = {
+  apiKey: "AIzaSyB9HgIMiE-Bjww-tugV_tha35FGbjIRaj0",
+  authDomain: "physiographic-regions-factfile.firebaseapp.com",
+  projectId: "physiographic-regions-factfile",
+  storageBucket: "physiographic-regions-factfile.firebasestorage.app",
+  messagingSenderId: "865648837916",
+  appId: "1:865648837916:web:594a348cbfa567e73426d9"
+};
+
+// Load Firebase from CDN
+let db = null;
+let fbLoaded = false;
+
+function loadFirebase() {
+  return new Promise((resolve) => {
+    if (fbLoaded) { resolve(); return; }
+    const s1 = document.createElement('script');
+    s1.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js';
+    s1.onload = () => {
+      const s2 = document.createElement('script');
+      s2.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js';
+      s2.onload = () => {
+        firebase.initializeApp(FB_CONFIG);
+        db = firebase.firestore();
+        fbLoaded = true;
+        resolve();
+      };
+      document.head.appendChild(s2);
+    };
+    document.head.appendChild(s1);
+  });
+}
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const state = { completed: {}, answers: {}, current: null, step: 0, studentId: null, studentName: null };
+
+// ─────────────────────────────────────────────
+// SAVE / LOAD
+// ─────────────────────────────────────────────
+let saveTimer = null;
+
+function showSaveStatus(type, msg) {
+  const el = document.getElementById('save-status');
+  const txt = document.getElementById('save-text');
+  el.style.display = 'flex';
+  el.className = type;
+  txt.textContent = msg;
+  if (type === 'saved') {
+    setTimeout(() => { el.style.display = 'none'; }, 3000);
+  }
+}
+
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  showSaveStatus('saving', 'Saving…');
+  saveTimer = setTimeout(saveToFirebase, 1200);
+}
+
+async function saveToFirebase() {
+  if (!db || !state.studentId) return;
+  try {
+    const payload = {
+      name: state.studentName,
+      studentId: state.studentId,
+      completed: state.completed,
+      answers: state.answers,
+      lastSaved: firebase.firestore.FieldValue.serverTimestamp(),
+      regionsComplete: Object.keys(state.completed).length
+    };
+    await db.collection('students').doc(state.studentId).set(payload, { merge: true });
+    showSaveStatus('saved', '✓ Progress saved');
+  } catch(e) {
+    showSaveStatus('error', 'Save failed — check connection');
+    console.error('Firebase save error:', e);
+  }
+}
+
+async function loadFromFirebase(studentId) {
+  if (!db) return;
+  try {
+    const doc = await db.collection('students').doc(studentId).get();
+    if (doc.exists) {
+      const data = doc.data();
+      state.completed = data.completed || {};
+      state.answers = data.answers || {};
+      updateProgress();
+      renderGrid();
+      return true; // returning student
+    }
+    return false; // new student
+  } catch(e) {
+    console.error('Firebase load error:', e);
+    return false;
+  }
+}
+
+// ─────────────────────────────────────────────
+// LOGIN
+// ─────────────────────────────────────────────
+async function loginStudent() {
+  const nameInput = document.getElementById('login-name');
+  const errEl = document.getElementById('login-error');
+  const name = nameInput.value.trim();
+
+  if (!name || name.length < 2) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Please enter your full name to continue.';
+    nameInput.focus();
+    return;
+  }
+
+  // Disable button while loading
+  const btn = nameInput.nextElementSibling.nextElementSibling;
+  btn.disabled = true;
+  btn.textContent = 'Loading…';
+  errEl.style.display = 'none';
+
+  try {
+    await loadFirebase();
+    // Use name as ID (lowercased, spaces replaced) — simple but effective for a classroom
+    const studentId = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    state.studentId = studentId;
+    state.studentName = name;
+
+    const returning = await loadFromFirebase(studentId);
+
+    // Pre-fill name on done screen
+    const nameField = document.getElementById('student-name');
+    if (nameField) nameField.value = name;
+
+    showScreen('home-screen');
+    document.getElementById('save-status').style.display = 'flex';
+
+    if (returning && Object.keys(state.completed).length > 0) {
+      // Show a welcome back message briefly
+      showSaveStatus('saved', '✓ Welcome back — progress loaded!');
+    }
+  } catch(e) {
+    errEl.style.display = 'block';
+    errEl.textContent = 'Could not connect. Check your internet and try again.';
+    btn.disabled = false;
+    btn.textContent = 'Start (or continue) my assignment →';
+  }
+}
+
+// Allow pressing Enter on the name field
+document.addEventListener('DOMContentLoaded', () => {
+  const ni = document.getElementById('login-name');
+  if (ni) ni.addEventListener('keydown', e => { if (e.key === 'Enter') loginStudent(); });
+});
+
+// ─────────────────────────────────────────────
+// TEACHER DASHBOARD
+// ─────────────────────────────────────────────
+// Unlock with ?teacher=true in URL
+if (window.location.search.includes('teacher=true')) {
+  window.addEventListener('load', () => {
+    document.getElementById('dashboard-btn').style.display = 'block';
+  });
+}
+
+async function openDashboard() {
+  await loadFirebase();
+  const snapshot = await db.collection('students').orderBy('lastSaved', 'desc').get();
+  const rows = [];
+  snapshot.forEach(doc => {
+    const d = doc.data();
+    const complete = Object.keys(d.completed || {}).length;
+    const saved = d.lastSaved ? d.lastSaved.toDate().toLocaleString('en-CA') : 'unknown';
+    rows.push(`<tr>
+      <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-weight:600">${d.name || doc.id}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;text-align:center">
+        <span style="background:${complete===7?'#e8f5ee':'#f1f5f9'};color:${complete===7?'#14532d':'#475569'};padding:2px 10px;border-radius:99px;font-size:0.85rem;font-weight:700">${complete}/7</span>
+      </td>
+      <td style="padding:8px 12px;border-bottom:1px solid #e2e8f0;font-size:0.82rem;color:#64748b">${saved}</td>
+    </tr>`);
+  });
+
+  const dashHTML = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+    <title>Teacher Dashboard — Physiographic Regions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Nunito Sans',sans-serif;background:#f8f9fb;padding:2rem;color:#1e293b}h1{font-family:'Nunito',sans-serif;font-size:1.4rem;color:#1a4731;margin-bottom:0.25rem}p{font-size:0.88rem;color:#64748b;margin-bottom:1.5rem}table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.07)}th{background:#1a4731;color:#fff;padding:10px 12px;text-align:left;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em}</style>
+  </head><body>
+    <h1>🍁 Teacher Dashboard — Physiographic Regions</h1>
+    <p>Showing all students who have started the assignment. Refresh this tab to update.</p>
+    <table>
+      <thead><tr><th>Student name</th><th style="text-align:center">Regions complete</th><th>Last saved</th></tr></thead>
+      <tbody>${rows.length ? rows.join('') : '<tr><td colspan="3" style="padding:1rem;color:#94a3b8;text-align:center">No students have started yet.</td></tr>'}</tbody>
+    </table>
+  </body></html>`;
+
+  const blob = new Blob([dashHTML], { type: 'text/html' });
+  window.open(URL.createObjectURL(blob), '_blank');
+}
 
 // ─────────────────────────────────────────────
 // SCREENS
@@ -1300,7 +1464,7 @@ function renderStep() {
       const ta = document.getElementById('ta-' + qi);
       if (ta) {
         ta.value = state.answers[state.current][qi] || '';
-        ta.addEventListener('input', () => { state.answers[state.current][qi] = ta.value; });
+        ta.addEventListener('input', () => { state.answers[state.current][qi] = ta.value; scheduleSave(); });
       }
     }
   }
@@ -1359,6 +1523,7 @@ function selectChip(el, val, qi) {
   if (val === q.answer) {
     fb.className = 'feedback good show';
     fb.innerHTML = `<span class="feedback-icon">✅</span><span>${q.fb}</span>`;
+    scheduleSave();
   } else {
     fb.className = 'feedback bad show';
     fb.innerHTML = `<span class="feedback-icon">❌</span><span>Not quite — try again!</span>`;
@@ -1384,6 +1549,7 @@ function finishRegion() {
   state.completed[r.id] = true;
   updateProgress();
   renderGrid();
+  saveToFirebase();
   if (Object.keys(state.completed).length === 7) {
     showDone();
   } else {
@@ -1489,7 +1655,7 @@ function generateSummary() {
 }
 
 // ─────────────────────────────────────────────
-// INIT
+// INIT — runs after login
 // ─────────────────────────────────────────────
 renderGrid();
 updateProgress();
